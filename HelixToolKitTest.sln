@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelixToolKitTest", "HelixToolKitTest\HelixToolKitTest.csproj", "{DA35856C-C8FD-4571-A63B-7F5989A1C077}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelixToolKit.Extension", "HelixToolKit.Extension\HelixToolKit.Extension.csproj", "{C4E708D8-B6D5-49E2-8FE1-23CDC68709EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA35856C-C8FD-4571-A63B-7F5989A1C077}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA35856C-C8FD-4571-A63B-7F5989A1C077}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA35856C-C8FD-4571-A63B-7F5989A1C077}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA35856C-C8FD-4571-A63B-7F5989A1C077}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4E708D8-B6D5-49E2-8FE1-23CDC68709EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4E708D8-B6D5-49E2-8FE1-23CDC68709EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4E708D8-B6D5-49E2-8FE1-23CDC68709EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4E708D8-B6D5-49E2-8FE1-23CDC68709EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA4A6A02-952D-4550-89A1-4FB4036DBF04}
+	EndGlobalSection
+EndGlobal
