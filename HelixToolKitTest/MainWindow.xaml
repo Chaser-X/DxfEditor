@@ -1,0 +1,19 @@
+﻿<Window x:Class="HelixToolKitTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:helix="http://helix-toolkit.org/wpf"
+        xmlns:extension="clr-namespace:HelixToolKit.Extension;assembly=HelixToolKit.Extension"
+        xmlns:local="clr-namespace:HelixToolKitTest"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <helix:HelixViewport3D x:Name="canves" ShowCoordinateSystem="True" ZoomExtentsWhenLoaded="True" Background="AliceBlue">
+            <helix:SunLight></helix:SunLight>
+            <!--<helix:CoordinateSystemVisual3D ArrowLengths="3" />-->
+            <extension:GridLinesVisual3D MinorDistance="100" Length="200" Width="200" MajorLineThickness="1" MinorLineThickness="0.5" MajorDistance="100" />
+            <!--<helix:QuadVisual3D Point1="0,0,0" Point2="10,0,0" Point3="10,10,0" Point4="0,10,10"/>-->
+        </helix:HelixViewport3D>
+    </Grid>
+</Window>

@@ -1,0 +1,12 @@
+C:\Users\Administrator\source\repos\HelixToolKitTest\HelixToolKit.Extension\obj\Debug\HelixToolKit.Extension.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\HelixToolKitTest\HelixToolKit.Extension\bin\Debug\HelixToolKit.Extension.dll
+C:\Users\Administrator\source\repos\HelixToolKitTest\HelixToolKit.Extension\bin\Debug\HelixToolKit.Extension.pdb
+C:\Users\Administrator\source\repos\HelixToolKitTest\HelixToolKit.Extension\bin\Debug\HelixToolkit.dll
+C:\Users\Administrator\source\repos\HelixToolKitTest\HelixToolKit.Extension\bin\Debug\HelixToolkit.Wpf.dll
+C:\Users\Administrator\source\repos\HelixToolKitTest\HelixToolKit.Extension\bin\Debug\HelixToolkit.pdb
+C:\Users\Administrator\source\repos\HelixToolKitTest\HelixToolKit.Extension\bin\Debug\HelixToolkit.xml
+C:\Users\Administrator\source\repos\HelixToolKitTest\HelixToolKit.Extension\bin\Debug\HelixToolkit.Wpf.pdb
+C:\Users\Administrator\source\repos\HelixToolKitTest\HelixToolKit.Extension\bin\Debug\HelixToolkit.Wpf.xml
+C:\Users\Administrator\source\repos\HelixToolKitTest\HelixToolKit.Extension\obj\Debug\HelixToolKit.Extension.csproj.CopyComplete
+C:\Users\Administrator\source\repos\HelixToolKitTest\HelixToolKit.Extension\obj\Debug\HelixToolKit.Extension.dll
+C:\Users\Administrator\source\repos\HelixToolKitTest\HelixToolKit.Extension\obj\Debug\HelixToolKit.Extension.pdb
