@@ -1,0 +1,22 @@
+﻿<Window x:Class="TestDX.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:tools="http://helix-toolkit.org/wpf/SharpDX"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestDX"
+        xmlns:dd="clr-namespace:HelixToolkit.Wpf.SharpDX.Elements2D;assembly=HelixToolkit.Wpf.SharpDX"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <tools:Viewport3DX ZoomExtentsWhenLoaded="True">
+            <tools:Viewport3DX.Camera>
+                <tools:PerspectiveCamera Position="0,0,4"/>
+            </tools:Viewport3DX.Camera>
+
+            <tools:Viewport3DX.Content2D>
+                <dd:Button2D Width="10" Height="10" Background="Red"/>
+            </tools:Viewport3DX.Content2D>
+        </tools:Viewport3DX>
+    </Grid>
+</Window>

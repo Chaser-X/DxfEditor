@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpDxf", "SharpDxf\SharpDxf.csproj", "{785380E0-CEB9-4C34-82E5-60D0E33E848E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestViewer", "TestViewer\TestViewer.csproj", "{55390806-4BEB-425D-B932-7F38DE10A1B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpDxf.Control", "SharpDxf.Control\SharpDxf.Control.csproj", "{C0C51F36-0DAA-4998-92F9-85EF3FE3470F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestView", "TestView\TestView.csproj", "{9609462E-75F1-4AA8-8378-B1180E683546}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestDX", "TestDX\TestDX.csproj", "{A91CC953-EDEA-4EB3-943D-63BF32C71BBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpVisual", "SharpVisual\SharpVisual.csproj", "{C6E08781-CA5A-4CCD-BC74-3B4435B75E60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelixToolKit.Extension", "HelixToolKit.Extension\HelixToolKit.Extension.csproj", "{C4E708D8-B6D5-49E2-8FE1-23CDC68709EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{785380E0-CEB9-4C34-82E5-60D0E33E848E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55390806-4BEB-425D-B932-7F38DE10A1B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55390806-4BEB-425D-B932-7F38DE10A1B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55390806-4BEB-425D-B932-7F38DE10A1B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55390806-4BEB-425D-B932-7F38DE10A1B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0C51F36-0DAA-4998-92F9-85EF3FE3470F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0C51F36-0DAA-4998-92F9-85EF3FE3470F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0C51F36-0DAA-4998-92F9-85EF3FE3470F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0C51F36-0DAA-4998-92F9-85EF3FE3470F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9609462E-75F1-4AA8-8378-B1180E683546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9609462E-75F1-4AA8-8378-B1180E683546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9609462E-75F1-4AA8-8378-B1180E683546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9609462E-75F1-4AA8-8378-B1180E683546}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A91CC953-EDEA-4EB3-943D-63BF32C71BBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A91CC953-EDEA-4EB3-943D-63BF32C71BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A91CC953-EDEA-4EB3-943D-63BF32C71BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A91CC953-EDEA-4EB3-943D-63BF32C71BBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6E08781-CA5A-4CCD-BC74-3B4435B75E60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6E08781-CA5A-4CCD-BC74-3B4435B75E60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6E08781-CA5A-4CCD-BC74-3B4435B75E60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6E08781-CA5A-4CCD-BC74-3B4435B75E60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4E708D8-B6D5-49E2-8FE1-23CDC68709EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4E708D8-B6D5-49E2-8FE1-23CDC68709EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4E708D8-B6D5-49E2-8FE1-23CDC68709EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4E708D8-B6D5-49E2-8FE1-23CDC68709EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

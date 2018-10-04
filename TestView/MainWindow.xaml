@@ -1,0 +1,17 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestView"
+        xmlns:Control="clr-namespace:SharpDxf.Control;assembly=SharpDxf.Control" x:Class="TestView.MainWindow"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <DockPanel>
+            <Control:SharpDxfView x:Name="view" Loaded="view_Loaded" >
+
+            </Control:SharpDxfView>
+        </DockPanel>
+    </Grid>
+</Window>

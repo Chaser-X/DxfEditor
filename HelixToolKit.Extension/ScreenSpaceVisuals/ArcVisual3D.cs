@@ -12,10 +12,10 @@ namespace HelixToolKit.Extension
     public class ArcVisual3D : ScreenSpaceVisual3DBase
     {
         public static readonly DependencyProperty ThicknessProperty =
-            DependencyProperty.Register("Thickness", typeof(double), typeof(ArcVisual3D), new UIPropertyMetadata(1.0,GeometryChanged));
+            DependencyProperty.Register("Thickness", typeof(double), typeof(ArcVisual3D), new UIPropertyMetadata(1.0, GeometryChanged));
 
         public static readonly DependencyProperty CenterProperty =
-             DependencyProperty.Register("Center", typeof(Point3D), typeof(ArcVisual3D), new UIPropertyMetadata(new Point3D(0,0,0), GeometryChanged));
+             DependencyProperty.Register("Center", typeof(Point3D), typeof(ArcVisual3D), new UIPropertyMetadata(new Point3D(0, 0, 0), GeometryChanged));
 
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.Register("Radius", typeof(double), typeof(ArcVisual3D), new UIPropertyMetadata(1.0, GeometryChanged));
@@ -27,8 +27,10 @@ namespace HelixToolKit.Extension
         public static readonly DependencyProperty EndAngleProperty =
             DependencyProperty.Register("EndAngle", typeof(double), typeof(ArcVisual3D), new UIPropertyMetadata(Math.PI, GeometryChanged));
 
+        public static readonly DependencyProperty ThetaDivProperty =
+            DependencyProperty.Register("ThetaDiv", typeof(int), typeof(ArcVisual3D), new UIPropertyMetadata(32, GeometryChanged));
 
-        private ArcGeometryBuilder builder ;
+        private ArcGeometryBuilder builder;
 
         public double Thickness
         {
@@ -48,7 +50,6 @@ namespace HelixToolKit.Extension
             set { SetValue(RadiusProperty, value); }
         }
 
-
         public double StartAngle
         {
             get { return (double)GetValue(StartAngleProperty); }
@@ -61,17 +62,35 @@ namespace HelixToolKit.Extension
             set { SetValue(EndAngleProperty, value); }
         }
 
+        public int ThetaDiv
+        {
+            get { return (int)GetValue(ThetaDivProperty); }
+            set { SetValue(ThetaDivProperty, value); }
+        }
+
+
         public ArcVisual3D()
         {
             builder = new ArcGeometryBuilder(this);
         }
 
-      
+        public ArcVisual3D(Point3D center , double radius = 10, double startangle = 0, double endangle = Math.PI * 2, int thetadiv = 32,
+            double thickness = 1)
+        {
+            builder = new ArcGeometryBuilder(this);
+  
+            Center = center;
+            Radius = radius;
+            StartAngle = startangle;
+            EndAngle = endangle;
+            ThetaDiv = thetadiv;
+            Thickness = thickness;
+        }
 
         protected override void UpdateGeometry()
         {
-            this.Mesh.Positions = this.builder.CreatePositions(this.Center,this.Radius , this.StartAngle,
-                this.EndAngle, 32, this.Thickness);
+            this.Mesh.Positions = this.builder.CreatePositions(this.Center, this.Radius, this.StartAngle,
+                this.EndAngle, this.ThetaDiv, this.Thickness);
             var nn = this.Mesh.Positions.Count;
             if (this.Mesh.TriangleIndices.Count != nn * 3)
             {

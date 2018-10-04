@@ -49,10 +49,22 @@ namespace HelixToolKit.Extension
         {
             var halfThickness = thickness * 0.5;
             var spoints = new Point3DCollection();
+
+            if (Math.Abs(endAngle - startAngle) > 2 * Math.PI)
+            {
+                startAngle = 0;
+                endAngle = 2 * Math.PI;
+            }
+
+            if (endAngle - startAngle < 0)
+            {
+                endAngle += 2 * Math.PI;
+            }
+
             for (int i = 0; i <= thetadiv; i++)
             {
-                double x = radius * Math.Sin(i * (endAngle - startAngle) / thetadiv + startAngle) + center.X;
-                double y = radius * Math.Cos(i * (endAngle - startAngle) / thetadiv + startAngle) + center.Y;
+                double x = radius * Math.Cos(i * (endAngle - startAngle) / thetadiv + startAngle) + center.X;
+                double y = radius * Math.Sin(i * (endAngle - startAngle) / thetadiv + startAngle) + center.Y;
                 spoints.Add(new Point3D(x, y, center.Z));
             }
 
