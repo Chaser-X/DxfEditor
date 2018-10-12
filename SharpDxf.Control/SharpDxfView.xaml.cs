@@ -34,6 +34,7 @@ namespace SharpDxf.Control
             Point mousePos = e.GetPosition(canves);
             PointHitTestParameters hitParams = new PointHitTestParameters(mousePos);
             VisualTreeHelper.HitTest(canves, null, ResultCallback, hitParams);
+           
         }
 
         public HitTestResultBehavior ResultCallback(HitTestResult result)

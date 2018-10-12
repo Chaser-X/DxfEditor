@@ -5,13 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestView"
         xmlns:Control="clr-namespace:SharpDxf.Control;assembly=SharpDxf.Control" x:Class="TestView.MainWindow"
+        xmlns:pro ="http://propertytools.org/wpf"
+        xmlns:test="http://gu.se/PropertyGrid"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <DockPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.61*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        
+        <DockPanel Grid.Column="0">
             <Control:SharpDxfView x:Name="view" Loaded="view_Loaded" >
 
             </Control:SharpDxfView>
+
+        </DockPanel>
+        <DockPanel Grid.Column="1">
+
+            <!--<pro:PropertyGrid SelectedObject="{Binding ElementName=view, Path=DataContext}"/>-->
         </DockPanel>
     </Grid>
 </Window>

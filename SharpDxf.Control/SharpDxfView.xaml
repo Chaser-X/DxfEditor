@@ -15,7 +15,7 @@
                 </helix:HelixViewport3D.DefaultCamera>
                 <helix:SunLight/>
                 <ModelVisual3D Content="{Binding Model3D}"/>
-
+                <!--<helixExtension:XXXVisual3D/>-->
                 <!--<helix:ArrowVisual3D Point1="0,0,0" Point2="0,100,0">-->
 
                 <!--</helix:ArrowVisual3D>-->

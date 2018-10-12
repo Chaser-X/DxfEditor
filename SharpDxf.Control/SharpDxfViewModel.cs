@@ -1,26 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
-using Caliburn;
 using Caliburn.Micro;
 using System.Windows.Media;
-using System.Windows;
 
 using HelixToolkit.Wpf;
 using HelixToolKit.Extension;
 using SharpDxf.Entities;
+using PropertyTools.Wpf;
+using PropertyTools.DataAnnotations;
 
 namespace SharpDxf.Control
 {
     public class SharpDxfViewModel : PropertyChangedBase
     {
-        public SharpDxfViewModel() { }
-
+        public SharpDxfViewModel()
+        {
+            
+        }
         Model3DGroup model3d = new Model3DGroup();
+
+        [Category("model")]
         public Model3DGroup Model3D
         {
             get
@@ -46,7 +46,7 @@ namespace SharpDxf.Control
             //var ls = new HelixToolkit.Wpf.LineSegment(new System.Windows.Point(0, 0), new System.Windows.Point(10, 190));
 
             SharpDxf.DxfDocument doc = new DxfDocument();
-            doc.Load(@"C:\Users\SHZBG\Desktop\3DVisual\metal-part-01.dxf");
+            doc.Load(@"C:\Users\SHZBG\Desktop\3DVisual\cylinder.dxf");
             foreach (var l in doc.Lines)
             {
                 var l3d = new LinesVisual3D();
@@ -75,31 +75,25 @@ namespace SharpDxf.Control
             foreach (var p in doc.Polylines)
             {
                 var mesh = new MeshBuilder();
+
                 var pp = p as PolyfaceMesh;
-
-
-                var points = pp.Vertexes.Select(x => new Point3D(x.Location.X, x.Location.Y, x.Location.Z));
-
-                var p3d = new PointsVisual3D();
-
-                p3d.Points = new Point3DCollection(points);
-
-                mesh.Normals = null;
-                mesh.TextureCoordinates = null;
-
-                foreach (var x in points)
-                    mesh.Positions.Add(x);
-
-                foreach (var x in pp.Faces)
+                if (pp != null)
                 {
-                    mesh.AddTriangle(x.VertexIndexes);
+
+                    mesh.Normals = null;
+                  //  mesh.TextureCoordinates = null;
+
+                    var points = pp.Vertexes.Select(x => new Point3D(x.Location.X, x.Location.Y, x.Location.Z));
+                    //foreach (var x in points)
+                    //    mesh.Positions.Add(x);
+                    //foreach (var x in pp.Faces)
+                    //    mesh.AddTriangle(x.VertexIndexes);
+                    mesh.AddRectangularMesh(points.ToList(), 2);
                 }
-                var model = new GeometryModel3D(mesh.ToMesh(), new DiffuseMaterial(Brushes.Green));
-                model.BackMaterial = new DiffuseMaterial(Brushes.Green);
-
-
+                //var p3d = new PointsVisual3D();
+                //p3d.Points = new Point3DCollection(points);
+                var model = new GeometryModel3D(mesh.ToMesh(), new DiffuseMaterial(Brushes.Green)) { BackMaterial = new DiffuseMaterial(Brushes.Green)};
                 Model3D.Children.Add(model);
-
             }
             NotifyOfPropertyChange(() => Model3D);
 

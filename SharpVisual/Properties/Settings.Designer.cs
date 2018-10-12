@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SharpVisual.Properties {
+namespace SharpDxf.Visual.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

@@ -29,9 +29,9 @@ namespace HelixToolKit.Extension
         /// </summary>
         private bool isRendering;
 
-    
+
         /// <summary>
-        /// Initializes a new instance of the <see cref = "ScreenSpaceVisual3D" /> class.
+        /// Initializes a new instance of the <see cref = "ScreenSpaceVisual3DBase" /> class.
         /// </summary>
         protected ScreenSpaceVisual3DBase()
         {
