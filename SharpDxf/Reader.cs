@@ -30,6 +30,7 @@ using SharpDxf.Entities;
 using SharpDxf.Header;
 using SharpDxf.Tables;
 using Attribute=SharpDxf.Entities.Attribute;
+using System.Collections.ObjectModel;
 
 namespace SharpDxf
 {
@@ -62,7 +63,7 @@ namespace SharpDxf
         private List<Line> lines;
         private List<IPolyline> polylines;
         private List<Text> texts;
-
+        private List<IEntityObject> entityCollection;
         //tables
         private Dictionary<string, ApplicationRegistry> appIds;
         private Dictionary<string, Layer> layers;
@@ -163,6 +164,12 @@ namespace SharpDxf
             get { return this.texts; }
         }
 
+        public List<IEntityObject> EntityCollection
+        {
+            get {
+                return this.entityCollection;
+            }
+        }
         #endregion
 
         #region public table properties
@@ -239,6 +246,7 @@ namespace SharpDxf
             this.polylines = new List<IPolyline>();
             this.points = new List<Point>();
             this.texts = new List<Text>();
+            this.entityCollection = new List<IEntityObject>();
             this.fileLine = -1;
 
             CodeValuePair code = this.ReadCodePair();
@@ -717,7 +725,7 @@ namespace SharpDxf
             CodeValuePair code = this.ReadCodePair();
             while (code.Value != StringCode.EndSection)
             {
-                IEntityObject entity;
+                IEntityObject entity = null;
                 switch (code.Value)
                 {
                     case DxfObjectCode.Arc:
@@ -769,6 +777,7 @@ namespace SharpDxf
                         //code = this.ReadCodePair();
                         break;
                 }
+                if (entity != null) this.entityCollection.Add(entity);
             }
         }
 

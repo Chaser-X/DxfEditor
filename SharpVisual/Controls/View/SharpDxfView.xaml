@@ -8,7 +8,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <helix:HelixViewport3D x:Name="canves" Background="LightGray" ModelUpDirection="0,1,0" ZoomExtentsWhenLoaded="True" ShowCoordinateSystem="True" IsHeadLightEnabled="True" IsRotationEnabled="True" RotateAroundMouseDownPoint="True"  MouseDown="canves_MouseDown" CameraRotationMode="Trackball" CoordinateSystemHorizontalPosition="Center" CalculateCursorPosition="True"  >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <helix:HelixViewport3D x:Name="canves" Grid.Row="0"   Background="LightGray" ModelUpDirection="0,1,0" ZoomExtentsWhenLoaded="True" ShowCoordinateSystem="True" IsHeadLightEnabled="True" IsRotationEnabled="True" RotateAroundMouseDownPoint="True" CameraRotationMode="Trackball" CoordinateSystemHorizontalPosition="Center" CalculateCursorPosition="True"  >
             <helix:HelixViewport3D.DefaultCamera>
                 <PerspectiveCamera  Position="0,0,4" />
             </helix:HelixViewport3D.DefaultCamera>
@@ -42,10 +46,16 @@
             <helix:CoordinateSystemVisual3D ArrowLengths="5"/>
             <helixExtension:GridLinesVisual3D Center="0,0,0" MajorDistance="50" Length="400" Width="400" MinorDistance="5" MajorLineThickness="1" MinorLineThickness="0.5"/>
         </helix:HelixViewport3D>
-        <!--<StackPanel>
-                <TextBlock Text="{Binding ElementName=canves ,Path=CursorPosition.X, StringFormat={}{0:f1}, FallbackValue=0.0 }"/>
-                <TextBlock Text="{Binding ElementName=canves ,Path=CursorPosition.Y, StringFormat={}{0:f1}, FallbackValue=0.0 }"/>
-                <TextBlock Text="{Binding ElementName=canves ,Path=CursorPosition.Z, StringFormat={}{0:f1}, FallbackValue=0.0 }"/>
-        </StackPanel>-->
+        <StackPanel Grid.Row="1">
+            <ToolBar Background="Gray" >
+                <TextBlock Text="X:"/>
+                <TextBlock Text="{Binding ElementName=canves ,Path=CursorPosition.X, StringFormat={}{0:f2}, FallbackValue=0.00 }"/>
+                <TextBlock Text="  Y:"/>
+                <TextBlock Text="{Binding ElementName=canves ,Path=CursorPosition.Y, StringFormat={}{0:f2}, FallbackValue=0.00 }"/>
+                <TextBlock Text="  Z:"/>
+                <TextBlock Text="{Binding ElementName=canves ,Path=CursorPosition.Z, StringFormat={}{0:f2}, FallbackValue=0.00 }"/>
+            </ToolBar>
+        </StackPanel>
+
     </Grid>
 </UserControl>

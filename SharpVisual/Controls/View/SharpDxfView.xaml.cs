@@ -23,6 +23,16 @@ namespace SharpDxf.Visual.Controls
         public SharpDxfView()
         {
             InitializeComponent();
+            DataContext = new SharpDxfViewModel();
+        }
+
+        public SharpDxfViewModel Model {
+            get {
+                return this.DataContext as SharpDxfViewModel;
+            }
+            set {
+                this.DataContext = value;
+            }
         }
     }
 }

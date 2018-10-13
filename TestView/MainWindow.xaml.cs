@@ -24,13 +24,13 @@ namespace TestView
         public MainWindow()
         {
             InitializeComponent();
-            var model = view.DataContext as SharpDxfViewModel;
-            model.Load(@"C:\Users\SHZBG\Desktop\3DVisual\ducky.obj");
+            //var model = view.DataContext as SharpDxfViewModel;
+            //model.Load(@"C:\Users\SHZBG\Desktop\3DVisual\ducky.obj");
         }
 
-        private void view_Loaded(object sender, RoutedEventArgs e)
-        {
+        //private void view_Loaded(object sender, RoutedEventArgs e)
+        //{
 
-        }
+        //}
     }
 }

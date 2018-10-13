@@ -59,3 +59,5 @@ C:\Users\SHZBG\Source\Repos\JustForTest\TestView\bin\Debug\PropertyTools.xml
 C:\Users\SHZBG\Source\Repos\JustForTest\TestView\bin\Debug\PropertyTools.Wpf.pdb
 C:\Users\SHZBG\Source\Repos\JustForTest\TestView\bin\Debug\PropertyTools.Wpf.xml
 C:\Users\SHZBG\Source\Repos\JustForTest\TestView\obj\Debug\TestView.csproj.TestView.exe.config
+C:\Users\SHZBG\Source\Repos\JustForTest\TestView\bin\Debug\SharpDxf.Visual.dll
+C:\Users\SHZBG\Source\Repos\JustForTest\TestView\bin\Debug\SharpDxf.Visual.pdb

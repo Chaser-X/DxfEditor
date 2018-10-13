@@ -123,6 +123,10 @@
       <Project>{c0c51f36-0daa-4998-92f9-85ef3fe3470f}</Project>
       <Name>SharpDxf.Control</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharpVisual\SharpDxf.Visual.csproj">
+      <Project>{c6e08781-ca5a-4ccd-bc74-3b4435b75e60}</Project>
+      <Name>SharpDxf.Visual</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

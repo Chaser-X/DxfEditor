@@ -32,7 +32,7 @@ using SharpDxf.Entities;
 using SharpDxf.Header;
 using SharpDxf.Objects;
 using SharpDxf.Tables;
-using Attribute=SharpDxf.Entities.Attribute;
+using Attribute = SharpDxf.Entities.Attribute;
 
 namespace SharpDxf
 {
@@ -86,7 +86,7 @@ namespace SharpDxf
         private List<Point> points;
         private List<IPolyline> polylines;
         private List<Text> texts;
-
+        private List<IEntityObject> entityCollection;
         #endregion
 
         #endregion
@@ -350,6 +350,16 @@ namespace SharpDxf
             get { return this.texts.AsReadOnly(); }
         }
 
+        /// <summary>
+        /// Gets the <see cref="SharpDxf.Entities.IEntityObject">text</see> list.
+        /// </summary>
+        public ReadOnlyCollection<IEntityObject> EntityCollection
+        {
+            get
+            {
+                return this.entityCollection.AsReadOnly();
+            }
+        }
         #endregion
 
         #endregion
@@ -480,32 +490,32 @@ namespace SharpDxf
             switch (entity.Type)
             {
                 case EntityType.Arc:
-                    this.arcs.Add((Arc) entity);
+                    this.arcs.Add((Arc)entity);
                     break;
                 case EntityType.Circle:
-                    this.circles.Add((Circle) entity);
+                    this.circles.Add((Circle)entity);
                     break;
                 case EntityType.Ellipse:
-                    this.ellipses.Add((Ellipse) entity);
+                    this.ellipses.Add((Ellipse)entity);
                     break;
                 case EntityType.NurbsCurve:
                     throw new NotImplementedException("Nurbs curves not avaliable at the moment.");
-                    this.nurbsCurves.Add((NurbsCurve) entity);
+                    this.nurbsCurves.Add((NurbsCurve)entity);
                     break;
                 case EntityType.Point:
-                    this.points.Add((Point) entity);
+                    this.points.Add((Point)entity);
                     break;
                 case EntityType.Face3D:
-                    this.faces3d.Add((Face3d) entity);
+                    this.faces3d.Add((Face3d)entity);
                     break;
                 case EntityType.Solid:
-                    this.solids.Add((Solid) entity);
+                    this.solids.Add((Solid)entity);
                     break;
                 case EntityType.Insert:
                     // if the block definition has already been added, we do not need to do anything else
-                    if (!this.blocks.ContainsKey(((Insert) entity).Block.Name))
+                    if (!this.blocks.ContainsKey(((Insert)entity).Block.Name))
                     {
-                        this.blocks.Add(((Insert) entity).Block.Name, ((Insert) entity).Block);
+                        this.blocks.Add(((Insert)entity).Block.Name, ((Insert)entity).Block);
 
                         if (!this.layers.ContainsKey(((Insert)entity).Block.Layer.Name))
                         {
@@ -513,12 +523,12 @@ namespace SharpDxf
                         }
 
                         //for new block definitions configure its entities
-                        foreach (IEntityObject blockEntity in ((Insert) entity).Block.Entities)
+                        foreach (IEntityObject blockEntity in ((Insert)entity).Block.Entities)
                         {
                             // check if the entity has not been added to the document
                             if (this.addedObjects.ContainsKey(blockEntity))
                                 throw new ArgumentException("The entity " + blockEntity.Type +
-                                                            " object of the block " + ((Insert) entity).Block.Name +
+                                                            " object of the block " + ((Insert)entity).Block.Name +
                                                             " has already been added to the document.", "entity");
                             this.addedObjects.Add(blockEntity, blockEntity);
 
@@ -532,7 +542,7 @@ namespace SharpDxf
                             }
                         }
                         //for new block definitions configure its attributes
-                        foreach (Attribute attribute in ((Insert) entity).Attributes)
+                        foreach (Attribute attribute in ((Insert)entity).Attributes)
                         {
                             if (!this.layers.ContainsKey(attribute.Layer.Name))
                             {
@@ -561,29 +571,29 @@ namespace SharpDxf
                         }
                     }
 
-                    this.inserts.Add((Insert) entity);
+                    this.inserts.Add((Insert)entity);
                     break;
                 case EntityType.Line:
-                    this.lines.Add((Line) entity);
+                    this.lines.Add((Line)entity);
                     break;
                 case EntityType.LightWeightPolyline:
-                    this.polylines.Add((IPolyline) entity);
+                    this.polylines.Add((IPolyline)entity);
                     break;
                 case EntityType.Polyline:
-                    this.polylines.Add((IPolyline) entity);
+                    this.polylines.Add((IPolyline)entity);
                     break;
                 case EntityType.Polyline3d:
-                    this.polylines.Add((IPolyline) entity);
+                    this.polylines.Add((IPolyline)entity);
                     break;
                 case EntityType.PolyfaceMesh:
-                    this.polylines.Add((IPolyline) entity);
+                    this.polylines.Add((IPolyline)entity);
                     break;
                 case EntityType.Text:
-                    if (!this.textStyles.ContainsKey(((Text) entity).Style.Name))
+                    if (!this.textStyles.ContainsKey(((Text)entity).Style.Name))
                     {
-                        this.textStyles.Add(((Text) entity).Style.Name, ((Text) entity).Style);
+                        this.textStyles.Add(((Text)entity).Style.Name, ((Text)entity).Style);
                     }
-                    this.texts.Add((Text) entity);
+                    this.texts.Add((Text)entity);
                     break;
                 case EntityType.Vertex:
                     throw new ArgumentException("The entity " + entity.Type + " is only allowed as part of another entity", "entity");
@@ -610,6 +620,96 @@ namespace SharpDxf
                     throw new NotImplementedException("The entity " + entity.Type + " is not implemented or unknown");
             }
 
+            entityCollection.Add(entity);
+
+        }
+        /// <summary>
+        /// delete a  <see cref="IEntityObject">entity</see> from the document.
+        /// </summary>
+        /// <param name="entity">An <see cref="IEntityObject">entity</see></param>
+        public void DeletEntity(IEntityObject entity)
+        {
+            if (this.addedObjects.ContainsKey(entity))
+            {
+                this.addedObjects.Remove(entity);
+            }
+            if (this.entityCollection.Contains(entity))
+            {
+                switch (entity.Type)
+                {
+                    case EntityType.Arc:
+                        this.arcs.Remove((Arc)entity);
+                        break;
+                    case EntityType.Circle:
+                        this.circles.Remove((Circle)entity);
+                        break;
+                    case EntityType.Ellipse:
+                        this.ellipses.Remove((Ellipse)entity);
+                        break;
+                    case EntityType.NurbsCurve:
+                        throw new NotImplementedException("Nurbs curves not avaliable at the moment.");
+                        this.nurbsCurves.Remove((NurbsCurve)entity);
+                        break;
+                    case EntityType.Point:
+                        this.points.Remove((Point)entity);
+                        break;
+                    case EntityType.Face3D:
+                        this.faces3d.Remove((Face3d)entity);
+                        break;
+                    case EntityType.Solid:
+                        this.solids.Remove((Solid)entity);
+                        break;
+                    case EntityType.Insert:
+                        // if the block definition has already been added, we do not need to do anything else
+
+
+                        this.inserts.Remove((Insert)entity);
+                        break;
+                    case EntityType.Line:
+                        this.lines.Remove((Line)entity);
+                        break;
+                    case EntityType.LightWeightPolyline:
+                        this.polylines.Remove((IPolyline)entity);
+                        break;
+                    case EntityType.Polyline:
+                        this.polylines.Remove((IPolyline)entity);
+                        break;
+                    case EntityType.Polyline3d:
+                        this.polylines.Remove((IPolyline)entity);
+                        break;
+                    case EntityType.PolyfaceMesh:
+                        this.polylines.Remove((IPolyline)entity);
+                        break;
+                    case EntityType.Text:
+                        this.texts.Remove((Text)entity);
+                        break;
+                    case EntityType.Vertex:
+                        throw new ArgumentException("The entity " + entity.Type + " is only allowed as part of another entity", "entity");
+
+                    case EntityType.PolylineVertex:
+                        throw new ArgumentException("The entity " + entity.Type + " is only allowed as part of another entity", "entity");
+
+                    case EntityType.Polyline3dVertex:
+                        throw new ArgumentException("The entity " + entity.Type + " is only allowed as part of another entity", "entity");
+
+                    case EntityType.PolyfaceMeshVertex:
+                        throw new ArgumentException("The entity " + entity.Type + " is only allowed as part of another entity", "entity");
+
+                    case EntityType.PolyfaceMeshFace:
+                        throw new ArgumentException("The entity " + entity.Type + " is only allowed as part of another entity", "entity");
+
+                    case EntityType.AttributeDefinition:
+                        throw new ArgumentException("The entity " + entity.Type + " is only allowed as part of another entity", "entity");
+
+                    case EntityType.Attribute:
+                        throw new ArgumentException("The entity " + entity.Type + " is only allowed as part of another entity", "entity");
+
+                    default:
+                        throw new NotImplementedException("The entity " + entity.Type + " is not implemented or unknown");
+                }
+                entityCollection.Remove(entity);
+            }
+
         }
 
         /// <summary>
@@ -633,7 +733,7 @@ namespace SharpDxf
 
             //header information
             this.version = dxfReader.Version;
-            this.handleCount = Convert.ToInt32(dxfReader.HandleSeed,16);
+            this.handleCount = Convert.ToInt32(dxfReader.HandleSeed, 16);
 
             //tables information
             this.appRegisterNames = dxfReader.ApplicationRegistrationIds;
@@ -653,6 +753,7 @@ namespace SharpDxf
             this.lines = dxfReader.Lines;
             this.inserts = dxfReader.Inserts;
             this.texts = dxfReader.Texts;
+            this.entityCollection = dxfReader.EntityCollection;
 
             Thread.CurrentThread.CurrentCulture = cultureInfo;
 
@@ -662,7 +763,7 @@ namespace SharpDxf
             //{
             //    this.handleCount = viewPort.AsignHandle(this.handleCount);
             //}
-           
+
             ////add default layer
             //Layer.PlotStyleHandle = Conversion.Hex(this.handleCount++);
             //Layer byDefault = Layer.Default;
@@ -705,7 +806,7 @@ namespace SharpDxf
             //{
             //    this.handleCount = block.AsignHandle(this.handleCount);
             //}
-           
+
             #endregion
         }
 
@@ -740,7 +841,7 @@ namespace SharpDxf
                 {
                     if (lwPoly is LightWeightPolyline)
                     {
-                        Polyline poly = ((LightWeightPolyline) lwPoly).ToPolyline();
+                        Polyline poly = ((LightWeightPolyline)lwPoly).ToPolyline();
                         this.handleCount = poly.AsignHandle(this.handleCount);
                         lwPolys.Add(poly);
                     }
@@ -748,7 +849,7 @@ namespace SharpDxf
                     {
                         lwPolys.Add(lwPoly);
                     }
-                    
+
                 }
 
                 // since AutoCad dxf Version 12 doesn't support lwpolylines in blocks, we will transform them in polylines
@@ -760,7 +861,7 @@ namespace SharpDxf
                     {
                         if (entity is LightWeightPolyline)
                         {
-                            Polyline poly = ((LightWeightPolyline) entity).ToPolyline();
+                            Polyline poly = ((LightWeightPolyline)entity).ToPolyline();
                             this.handleCount = poly.AsignHandle(this.handleCount);
                             blockEntities[block.Name].Add(poly);
                         }
@@ -798,7 +899,7 @@ namespace SharpDxf
                     {
                         if (entity is Polyline)
                         {
-                            LightWeightPolyline poly = ((Polyline) entity).ToLightWeightPolyline();
+                            LightWeightPolyline poly = ((Polyline)entity).ToLightWeightPolyline();
                             this.handleCount = poly.AsignHandle(this.handleCount);
                             blockEntities[block.Name].Add(poly);
                         }
@@ -938,12 +1039,12 @@ namespace SharpDxf
             }
             else
             {
-                foreach (Ellipse ellipse  in this.ellipses)
+                foreach (Ellipse ellipse in this.ellipses)
                 {
                     dxfWriter.WriteEntity(ellipse);
                 }
             }
-            foreach (NurbsCurve nurbsCurve  in this.nurbsCurves)
+            foreach (NurbsCurve nurbsCurve in this.nurbsCurves)
             {
                 dxfWriter.WriteEntity(nurbsCurve);
             }
@@ -969,12 +1070,12 @@ namespace SharpDxf
             }
 
             // lwpolyline in Acad12 are written as polylines
-            
+
             foreach (IPolyline pol in lwPolys)
             {
-               dxfWriter.WriteEntity(pol);
+                dxfWriter.WriteEntity(pol);
             }
-            
+
             //foreach (IPolyline polyline in this.polylines)
             //{
             //    // avoid write lwpolylines in Acad12
@@ -1001,7 +1102,7 @@ namespace SharpDxf
 
             Thread.CurrentThread.CurrentCulture = cultureInfo;
         }
-         
+
         private void ReAsignHandlersAndDefaultObjects()
         {
             this.handleCount = 100;
@@ -1024,13 +1125,13 @@ namespace SharpDxf
             {
                 this.handleCount = layer.AsignHandle(this.handleCount);
             }
-            
+
             // add default line types
             LineType byLayer = LineType.ByLayer;
             LineType byBlock = LineType.ByBlock;
-            if(!this.lineTypes.ContainsKey(byLayer.Name)) 
+            if (!this.lineTypes.ContainsKey(byLayer.Name))
                 this.lineTypes.Add(byLayer.Name, byLayer);
-            if(!this.lineTypes.ContainsKey(byBlock.Name)) 
+            if (!this.lineTypes.ContainsKey(byBlock.Name))
                 this.lineTypes.Add(byBlock.Name, byBlock);
             foreach (LineType lineType in this.lineTypes.Values)
             {
@@ -1066,7 +1167,7 @@ namespace SharpDxf
             {
                 this.handleCount = appId.AsignHandle(this.handleCount);
             }
-            
+
             //add default dimension style
             DimensionStyle defaultDimStyle = DimensionStyle.Default;
             if (!this.dimStyles.ContainsKey(defaultDimStyle.Name))
@@ -1088,11 +1189,11 @@ namespace SharpDxf
             {
                 this.handleCount = entity.AsignHandle(this.handleCount);
             }
-            foreach (Solid entity in this.solids )
+            foreach (Solid entity in this.solids)
             {
                 this.handleCount = entity.AsignHandle(this.handleCount);
             }
-            foreach (Insert entity in this.inserts )
+            foreach (Insert entity in this.inserts)
             {
                 this.handleCount = entity.AsignHandle(this.handleCount);
             }
@@ -1108,7 +1209,7 @@ namespace SharpDxf
             {
                 this.handleCount = entity.AsignHandle(this.handleCount);
             }
-            foreach (Point  entity in this.points)
+            foreach (Point entity in this.points)
             {
                 this.handleCount = entity.AsignHandle(this.handleCount);
             }

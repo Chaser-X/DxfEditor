@@ -1,12 +1,11 @@
-﻿<Window
+﻿<Window x:Class="TestView.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestView"
-        xmlns:Control="clr-namespace:SharpDxf.Control;assembly=SharpDxf.Control" x:Class="TestView.MainWindow"
         xmlns:pro ="http://propertytools.org/wpf"
-        xmlns:test="http://gu.se/PropertyGrid"
+        xmlns:visual="clr-namespace:SharpDxf.Visual.Controls;assembly=SharpDxf.Visual"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
@@ -14,16 +13,13 @@
             <ColumnDefinition Width="1.61*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        
+
         <DockPanel Grid.Column="0">
-            <Control:SharpDxfView x:Name="view" Loaded="view_Loaded" >
-
-            </Control:SharpDxfView>
-
+            <visual:SharpDxfView/>
         </DockPanel>
         <DockPanel Grid.Column="1">
 
-            <!--<pro:PropertyGrid SelectedObject="{Binding ElementName=view, Path=DataContext}"/>-->
+            <pro:PropertyGrid SelectedObject="{Binding ElementName=view, Path=DataContext}"/>
         </DockPanel>
     </Grid>
 </Window>
