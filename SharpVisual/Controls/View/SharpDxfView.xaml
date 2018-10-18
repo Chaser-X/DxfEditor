@@ -12,11 +12,11 @@
             <RowDefinition Height="9*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <helix:HelixViewport3D x:Name="canves" Grid.Row="0"   Background="LightGray" ModelUpDirection="0,1,0" ZoomExtentsWhenLoaded="True" ShowCoordinateSystem="True" IsHeadLightEnabled="True" IsRotationEnabled="True" RotateAroundMouseDownPoint="True" CameraRotationMode="Trackball" CoordinateSystemHorizontalPosition="Center" CalculateCursorPosition="True"  >
+        <helix:HelixViewport3D x:Name="canves" Grid.Row="0" ItemsSource="{Binding EntityObjects}"  Background="LightGray" ModelUpDirection="0,1,0" ZoomExtentsWhenLoaded="True" ShowCoordinateSystem="True" IsHeadLightEnabled="True" IsRotationEnabled="True" RotateAroundMouseDownPoint="True" CameraRotationMode="Trackball" CoordinateSystemHorizontalPosition="Center" CalculateCursorPosition="True"  >
             <helix:HelixViewport3D.DefaultCamera>
                 <PerspectiveCamera  Position="0,0,4" />
             </helix:HelixViewport3D.DefaultCamera>
-            <helix:SunLight/>
+            <!--<helix:SunLight/>-->
             
             <!--<Viewport2DVisual3D>
                     <Viewport2DVisual3D.Geometry>
@@ -43,8 +43,8 @@
                         <Ellipse  Stroke="Green" StrokeThickness="0.1" Width="13" Height="13" IsHitTestVisible="True"/>
                     </Canvas>
                 </Viewport2DVisual3D>-->
-            <helix:CoordinateSystemVisual3D ArrowLengths="5"/>
-            <helixExtension:GridLinesVisual3D Center="0,0,0" MajorDistance="50" Length="400" Width="400" MinorDistance="5" MajorLineThickness="1" MinorLineThickness="0.5"/>
+            <!--<helix:CoordinateSystemVisual3D ArrowLengths="5"/>
+            <helixExtension:GridLinesVisual3D Center="0,0,0" MajorDistance="50" Length="400" Width="400" MinorDistance="5" MajorLineThickness="1" MinorLineThickness="0.5"/>-->
         </helix:HelixViewport3D>
         <StackPanel Grid.Row="1">
             <ToolBar Background="Gray" >

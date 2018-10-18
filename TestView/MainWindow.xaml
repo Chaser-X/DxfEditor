@@ -1,11 +1,13 @@
-﻿<Window x:Class="TestView.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestView"
         xmlns:pro ="http://propertytools.org/wpf"
+        xmlns:pg="clr-namespace:PropertyTools.DataAnnotations;assembly=PropertyTools"
         xmlns:visual="clr-namespace:SharpDxf.Visual.Controls;assembly=SharpDxf.Visual"
+        xmlns:Forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms" x:Class="TestView.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
@@ -13,13 +15,22 @@
             <ColumnDefinition Width="1.61*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-
-        <DockPanel Grid.Column="0">
-            <visual:SharpDxfView/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Column="0" Grid.Row="0">
+            <visual:SharpDxfView  x:Name="view"/>
         </DockPanel>
-        <DockPanel Grid.Column="1">
-
-            <pro:PropertyGrid SelectedObject="{Binding ElementName=view, Path=DataContext}"/>
+        <DockPanel Grid.Column="1" Grid.Row="0">
+            <pro:PropertyGrid SelectedObject="{Binding ElementName=view ,Path=DataContext.SelectedObject}" CategoryControlType="Expander" TabVisibility="Collapsed" RequiredAttribute="{x:Type pg:BrowsableAttribute}"/>
         </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="1">
+            <Button x:Name="Load" Content="LoadDxf" Click="Load_Click"/>
+        </DockPanel>
+        <DockPanel Grid.Column="1" Grid.Row="1">
+            <Button x:Name="Save" Content="SaveDxf" Click="Save_Click"/>
+        </DockPanel>
+
     </Grid>
 </Window>

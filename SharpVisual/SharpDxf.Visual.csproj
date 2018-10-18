@@ -60,6 +60,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Command\DxfViusalElementSelectionCommand.cs" />
     <Compile Include="Controls\ViewModel\SharpDxfViewModel.cs" />
     <Compile Include="Controls\View\SharpDxfView.xaml.cs">
       <DependentUpon>SharpDxfView.xaml</DependentUpon>
@@ -78,6 +79,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="VisualItem\DxfArcElement.cs" />
     <Compile Include="VisualItem\DxfLineElement.cs" />
     <Compile Include="VisualItem\DxfVisualElement.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -90,9 +92,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controls\Command\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\HelixToolKit.Extension\HelixToolKit.Extension.csproj">
       <Project>{c4e708d8-b6d5-49e2-8fe1-23cdc68709ef}</Project>

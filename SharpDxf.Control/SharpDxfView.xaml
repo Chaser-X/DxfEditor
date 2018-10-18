@@ -9,7 +9,7 @@
              d:DesignHeight="400" d:DesignWidth="600">
     <Grid >
         <DockPanel>
-            <helix:HelixViewport3D x:Name="canves" Background="LightGray" ModelUpDirection="0,1,0" ZoomExtentsWhenLoaded="True" ShowCoordinateSystem="True" IsHeadLightEnabled="True" IsRotationEnabled="True" RotateAroundMouseDownPoint="True"  MouseDown="canves_MouseDown" CameraRotationMode="Trackball" CoordinateSystemHorizontalPosition="Center" CalculateCursorPosition="True"  >
+            <helix:HelixViewport3D x:Name="canves"  Background="LightGray" ModelUpDirection="0,1,0" ZoomExtentsWhenLoaded="True" ShowCoordinateSystem="True" IsHeadLightEnabled="True" IsRotationEnabled="True" RotateAroundMouseDownPoint="True"  MouseDown="canves_MouseDown" CameraRotationMode="Trackball" CoordinateSystemHorizontalPosition="Center" CalculateCursorPosition="True"  >
                 <helix:HelixViewport3D.DefaultCamera>
                     <PerspectiveCamera  Position="0,0,4" />
                 </helix:HelixViewport3D.DefaultCamera>

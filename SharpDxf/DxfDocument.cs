@@ -161,6 +161,7 @@ namespace SharpDxf
             this.circles = new List<Circle>();
             this.points = new List<Point>();
             this.texts = new List<Text>();
+            this.entityCollection = new List<IEntityObject>();
         }
 
         #endregion
