@@ -60,11 +60,15 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Command\DxfVisualElementAddCommand.cs" />
+    <Compile Include="Controls\Command\DxfVisualElmentDeletCommand.cs" />
     <Compile Include="Controls\Command\DxfViusalElementSelectionCommand.cs" />
+    <Compile Include="Controls\SharpDxfEngine.cs" />
     <Compile Include="Controls\ViewModel\SharpDxfViewModel.cs" />
     <Compile Include="Controls\View\SharpDxfView.xaml.cs">
       <DependentUpon>SharpDxfView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ImageExtension.cs" />
     <Compile Include="NotifyPropertyChangeBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -92,7 +96,70 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icons\101.png" />
+    <Resource Include="Icons\102.png" />
+    <Resource Include="Icons\103.png" />
+    <Resource Include="Icons\104.png" />
+    <Resource Include="Icons\105.png" />
+    <Resource Include="Icons\106.png" />
+    <Resource Include="Icons\107.png" />
+    <Resource Include="Icons\108.png" />
+    <Resource Include="Icons\109.png" />
+    <Resource Include="Icons\110.png" />
+    <Resource Include="Icons\111.png" />
+    <Resource Include="Icons\112.png" />
+    <Resource Include="Icons\113.png" />
+    <Resource Include="Icons\114.png" />
+    <Resource Include="Icons\115.png" />
+    <Resource Include="Icons\116.png" />
+    <Resource Include="Icons\117.png" />
+    <Resource Include="Icons\118.png" />
+    <Resource Include="Icons\119.png" />
+    <Resource Include="Icons\120.png" />
+    <Resource Include="Icons\121.png" />
+    <Resource Include="Icons\122.png" />
+    <Resource Include="Icons\123.png" />
+    <Resource Include="Icons\124.png" />
+    <Resource Include="Icons\125.png" />
+    <Resource Include="Icons\126.png" />
+    <Resource Include="Icons\127.png" />
+    <Resource Include="Icons\128.png" />
+    <Resource Include="Icons\129.png" />
+    <Resource Include="Icons\130.png" />
+    <Resource Include="Icons\131.png" />
+    <Resource Include="Icons\132.png" />
+    <Resource Include="Icons\201.png" />
+    <Resource Include="Icons\202.png" />
+    <Resource Include="Icons\203.png" />
+    <Resource Include="Icons\204.png" />
+    <Resource Include="Icons\205.png" />
+    <Resource Include="Icons\206.png" />
+    <Resource Include="Icons\207.png" />
+    <Resource Include="Icons\208.png" />
+    <Resource Include="Icons\209.png" />
+    <Resource Include="Icons\210.png" />
+    <Resource Include="Icons\211.png" />
+    <Resource Include="Icons\212.png" />
+    <Resource Include="Icons\213.png" />
+    <Resource Include="Icons\214.png" />
+    <Resource Include="Icons\215.png" />
+    <Resource Include="Icons\216.png" />
+    <Resource Include="Icons\217.png" />
+    <Resource Include="Icons\218.png" />
+    <Resource Include="Icons\219.png" />
+    <Resource Include="Icons\220.png" />
+    <Resource Include="Icons\221.png" />
+    <Resource Include="Icons\222.png" />
+    <Resource Include="Icons\223.png" />
+    <Resource Include="Icons\224.png" />
+    <Resource Include="Icons\225.png" />
+    <Resource Include="Icons\226.png" />
+    <Resource Include="Icons\227.png" />
+    <Resource Include="Icons\228.png" />
+    <Resource Include="Icons\229.png" />
+    <Resource Include="Icons\230.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HelixToolKit.Extension\HelixToolKit.Extension.csproj">
       <Project>{c4e708d8-b6d5-49e2-8fe1-23cdc68709ef}</Project>
@@ -113,5 +180,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

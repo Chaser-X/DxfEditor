@@ -4,20 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:helix="http://helix-toolkit.org/wpf"
+             xmlns:local="clr-namespace:SharpDxf.Visual"
              xmlns:helixExtension="clr-namespace:HelixToolKit.Extension;assembly=HelixToolKit.Extension"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="21"/>
         </Grid.RowDefinitions>
-        <helix:HelixViewport3D x:Name="canves" Grid.Row="0" ItemsSource="{Binding EntityObjects}"  Background="LightGray" ModelUpDirection="0,1,0" ZoomExtentsWhenLoaded="True" ShowCoordinateSystem="True" IsHeadLightEnabled="True" IsRotationEnabled="True" RotateAroundMouseDownPoint="True" CameraRotationMode="Trackball" CoordinateSystemHorizontalPosition="Center" CalculateCursorPosition="True"  >
+        <helix:HelixViewport3D  Grid.Row="0" x:Name="canves" Background="LightGray" ModelUpDirection="0,1,0" ZoomExtentsWhenLoaded="True" ShowCoordinateSystem="True" IsHeadLightEnabled="True" IsRotationEnabled="True" RotateAroundMouseDownPoint="True" CameraRotationMode="Trackball" CalculateCursorPosition="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" ViewCubeHeight="78" >
             <helix:HelixViewport3D.DefaultCamera>
-                <PerspectiveCamera  Position="0,0,4" />
+                <PerspectiveCamera  Position="0,0,1" />
             </helix:HelixViewport3D.DefaultCamera>
-            <!--<helix:SunLight/>-->
-            
             <!--<Viewport2DVisual3D>
                     <Viewport2DVisual3D.Geometry>
                         <MeshGeometry3D Positions="200,200,0 -200,200,0 -200,-200,0 200,-200,0"
@@ -43,19 +45,16 @@
                         <Ellipse  Stroke="Green" StrokeThickness="0.1" Width="13" Height="13" IsHitTestVisible="True"/>
                     </Canvas>
                 </Viewport2DVisual3D>-->
-            <!--<helix:CoordinateSystemVisual3D ArrowLengths="5"/>
-            <helixExtension:GridLinesVisual3D Center="0,0,0" MajorDistance="50" Length="400" Width="400" MinorDistance="5" MajorLineThickness="1" MinorLineThickness="0.5"/>-->
         </helix:HelixViewport3D>
         <StackPanel Grid.Row="1">
-            <ToolBar Background="Gray" >
+            <ToolBar Background="Gray">
                 <TextBlock Text="X:"/>
-                <TextBlock Text="{Binding ElementName=canves ,Path=CursorPosition.X, StringFormat={}{0:f2}, FallbackValue=0.00 }"/>
+                <TextBlock Text="{Binding ElementName=canves ,Path=CursorPosition.X, StringFormat={}{0:f3}, FallbackValue=0.000 }"/>
                 <TextBlock Text="  Y:"/>
-                <TextBlock Text="{Binding ElementName=canves ,Path=CursorPosition.Y, StringFormat={}{0:f2}, FallbackValue=0.00 }"/>
+                <TextBlock Text="{Binding ElementName=canves ,Path=CursorPosition.Y, StringFormat={}{0:f3}, FallbackValue=0.000 }"/>
                 <TextBlock Text="  Z:"/>
-                <TextBlock Text="{Binding ElementName=canves ,Path=CursorPosition.Z, StringFormat={}{0:f2}, FallbackValue=0.00 }"/>
+                <TextBlock Text="{Binding ElementName=canves ,Path=CursorPosition.Z, StringFormat={}{0:f3}, FallbackValue=0.000 }"/>
             </ToolBar>
         </StackPanel>
-
     </Grid>
 </UserControl>

@@ -38,7 +38,7 @@ namespace TestView
             
             if(dlg.ShowDialog()== System.Windows.Forms.DialogResult.OK)
             {   
-                this.view.ViewModel.LoadDxf(dlg.FileName);
+                this.view.DxfEngine.LoadDxf(dlg.FileName);
             }
            
 
@@ -50,7 +50,7 @@ namespace TestView
 
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                this.view.ViewModel.SaveDxf(dlg.FileName);
+                this.view.DxfEngine.SaveDxf(dlg.FileName);
             }
         }
 
