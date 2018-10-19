@@ -61,8 +61,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Command\DxfVisualElementAddCommand.cs" />
-    <Compile Include="Controls\Command\DxfVisualElmentDeletCommand.cs" />
-    <Compile Include="Controls\Command\DxfViusalElementSelectionCommand.cs" />
+    <Compile Include="Controls\Command\DxfVisualElementDeletCommand.cs" />
+    <Compile Include="Controls\Command\DxfVisualElementSelectionCommand.cs" />
+    <Compile Include="Controls\Command\GenericCommand.cs" />
     <Compile Include="Controls\SharpDxfEngine.cs" />
     <Compile Include="Controls\ViewModel\SharpDxfViewModel.cs" />
     <Compile Include="Controls\View\SharpDxfView.xaml.cs">
@@ -70,6 +71,7 @@
     </Compile>
     <Compile Include="ImageExtension.cs" />
     <Compile Include="NotifyPropertyChangeBase.cs" />
+    <Compile Include="ObjectToBoolConvert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

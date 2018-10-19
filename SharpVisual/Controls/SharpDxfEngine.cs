@@ -22,32 +22,23 @@ namespace SharpDxf.Visual.Controls
     public class SharpDxfEngine : NotifyPropertyChangeBase
     {
         #region private vairable section
-        //视图窗口
-        private HelixViewport3D viewPort;
+        ////视图窗口
+        //private HelixViewport3D viewPort;
         //Dxf对象
         private DxfDocument dxfDoc;
         //选中的图元
         private DxfVisualElement selectedObject = null;
-        //图层编辑使能
-        private bool enableEdit;
-        //坐标系空间
-        private CoordinateSystemVisual3D coordinateSystem;
-        private HelixToolKit.Extension.GridLinesVisual3D backGroundGrid;
-        private LightSetup light;
-
         //图元存储空间
-        private ObservableCollection<Visual3D> entityObjects;
-        //需要显示的DXF对像
-        private ModelVisual3D showModels = new ModelVisual3D();
-
-        private Layer editLayer = new Layer("userLayer");
+        private ObservableCollection<DxfVisualElement> entityObjects;
+        ////需要显示的DXF对像
+        //private ModelVisual3D showModels = new ModelVisual3D();
         #endregion
 
         #region public property
         /// <summary>
         /// 所有可视化对象集合
         /// </summary>
-        public ObservableCollection<Visual3D> EntityObjects
+        public ObservableCollection<DxfVisualElement> EntityObjects
         {
             get
             {
@@ -76,41 +67,13 @@ namespace SharpDxf.Visual.Controls
                 SetProperty(ref selectedObject, value);
             }
         }
-        /// <summary>
-        /// 选中命令
-        /// </summary>
-        public DxfViusalElementSelectionCommand SelectionCommand { get; private set; }
+
+        public ModelVisual3D ShowModel { get; } = new ModelVisual3D();
         #endregion
-
         //构造函数
-        public SharpDxfEngine(HelixViewport3D view)
+        public SharpDxfEngine()
         {
-            viewPort = view;
-            EntityObjects = new ObservableCollection<Visual3D>();
-
-            coordinateSystem = new CoordinateSystemVisual3D()
-            {
-                ArrowLengths = 5
-            };
-            light = new SunLight() { ShowLights = false };
-            backGroundGrid = new HelixToolKit.Extension.GridLinesVisual3D()
-            {
-                Center = new Point3D(0, 0, 0),
-                MajorDistance = 50,
-                Length = 400,
-                Width = 400,
-                MinorDistance = 5,
-                MajorLineThickness = 1,
-                MinorLineThickness = 0.5
-            };
-
-            viewPort.Children.Add(coordinateSystem);
-            viewPort.Children.Add(light);
-            viewPort.Children.Add(backGroundGrid);
-            viewPort.Children.Add(showModels);
-
-            SelectionCommand = new DxfViusalElementSelectionCommand(this.viewPort, HandleSelectionVisualsEvent);
-            viewPort.InputBindings.Add(new MouseBinding(SelectionCommand, new MouseGesture(MouseAction.LeftClick)));
+            EntityObjects = new ObservableCollection<DxfVisualElement>();
         }
 
         /// <summary>
@@ -177,17 +140,9 @@ namespace SharpDxf.Visual.Controls
         /// <param name="e"></param>
         private void EntityObjects_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            showModels.Children.Clear();
-            EntityObjects?.ToList().ForEach(x => showModels.Children.Add(x));
+            ShowModel.Children.Clear();
+            EntityObjects?.ToList().ForEach(x => ShowModel.Children.Add(x));
         }
-        /// <summary>
-        /// 选中可视化物件时触发
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
-        private void HandleSelectionVisualsEvent(object sender, VisualSelectedEventArgs args)
-        {
-            this.SelectedObject = args.SelectedVisual as DxfVisualElement;
-        }
+     
     }
 }

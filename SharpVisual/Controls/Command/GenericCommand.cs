@@ -7,18 +7,28 @@ using System.Windows.Input;
 
 namespace SharpDxf.Visual.Controls
 {
-    public class DxfVisualElmentDeletCommand : ICommand
+    public class FitViewCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
 
+        private HelixToolkit.Wpf.HelixViewport3D viewPort;
+
+        public FitViewCommand()
+        {
+           
+        }
+
+
+
         public bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            viewPort = parameter as HelixToolkit.Wpf.HelixViewport3D;
+            viewPort.ResetCamera();
         }
     }
 }

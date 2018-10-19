@@ -8,17 +8,23 @@ namespace SharpDxf.Visual.Controls
     /// </summary>
     public partial class SharpDxfView : UserControl
     {
-        public SharpDxfView()
-        {
-            InitializeComponent();
-            DxfEngine = new SharpDxfEngine(this.canves);
-        }
-        public SharpDxfEngine DxfEngine { get; set; }
+
+        public SharpDxfViewModel ViewModel { get; }
         public HelixToolkit.Wpf.HelixViewport3D ViewPort
         {
-            get {
+            get
+            {
                 return this.canves;
             }
         }
+        public SharpDxfView()
+        {
+            InitializeComponent();
+            ViewModel = new SharpDxfViewModel(this.canves);
+            DataContext = ViewModel;
+        }
+
+       
+        
     }
 }

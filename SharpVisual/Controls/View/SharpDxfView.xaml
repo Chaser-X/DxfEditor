@@ -6,20 +6,49 @@
              xmlns:helix="http://helix-toolkit.org/wpf"
              xmlns:local="clr-namespace:SharpDxf.Visual"
              xmlns:helixExtension="clr-namespace:HelixToolKit.Extension;assembly=HelixToolKit.Extension"
+             xmlns:controls="clr-namespace:SharpDxf.Visual.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        
+        <local:ObjectToBoolConvert x:Key="ObjtoBool"/>
+        <controls:FitViewCommand x:Key="FitCommand"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="9*"/>
             <RowDefinition Height="21"/>
         </Grid.RowDefinitions>
-        <helix:HelixViewport3D  Grid.Row="0" x:Name="canves" Background="LightGray" ModelUpDirection="0,1,0" ZoomExtentsWhenLoaded="True" ShowCoordinateSystem="True" IsHeadLightEnabled="True" IsRotationEnabled="True" RotateAroundMouseDownPoint="True" CameraRotationMode="Trackball" CalculateCursorPosition="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" ViewCubeHeight="78" >
+        <ToolBarTray>
+            <ToolBar>
+                <TextBlock Text="Element:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/201.png}" Height="30"/>
+                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/217.png}" Height="30"/>
+                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/218.png}" Height="30"/>
+                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/219.png}" Height="30"/>
+                <Separator/>
+                <TextBlock Text="Layer:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ComboBox SelectedIndex="0">
+                    <ComboBoxItem Content="0"/>
+                    <ComboBoxItem Content="user layer"/>
+                </ComboBox>
+                <Separator/>
+                <TextBlock Text="Operater:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Content="{local:Image /SharpDxf.Visual;component/Icons/114.png}" Height="30" Command="{StaticResource FitCommand}" CommandParameter="{Binding ElementName=canves}"/>
+                <Button Content="{local:Image /SharpDxf.Visual;component/Icons/106.png}" Height="30" Command="{Binding DeletCommand}"/><!--IsEnabled="{Binding Subject.SelectedObject, Converter ={StaticResource ObjtoBool}}"-->
+            </ToolBar>
+        </ToolBarTray>
+
+        <helix:HelixViewport3D  Grid.Row="1" x:Name="canves" Background="LightGray" ModelUpDirection="0,1,0" ZoomExtentsWhenLoaded="True" ShowCoordinateSystem="True" IsHeadLightEnabled="True" IsRotationEnabled="True" RotateAroundMouseDownPoint="True" CameraRotationMode="Trackball" CalculateCursorPosition="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" ViewCubeHeight="78" >
+            <helix:HelixViewport3D.InputBindings>
+                <MouseBinding Command="{Binding SelectionCommand}" Gesture="LeftClick" MouseAction="LeftClick"/>
+            </helix:HelixViewport3D.InputBindings>
             <helix:HelixViewport3D.DefaultCamera>
                 <PerspectiveCamera  Position="0,0,1" />
             </helix:HelixViewport3D.DefaultCamera>
+            <helix:SunLight/>
+            <helix:CoordinateSystemVisual3D ArrowLengths="5"/>
+            <helixExtension:GridLinesVisual3D Center="0,0,0" MajorDistance="50" Length="400" Width="400" MinorDistance="5" MajorLineThickness="1" MinorLineThickness="0.5"/>
             <!--<Viewport2DVisual3D>
                     <Viewport2DVisual3D.Geometry>
                         <MeshGeometry3D Positions="200,200,0 -200,200,0 -200,-200,0 200,-200,0"
@@ -46,7 +75,7 @@
                     </Canvas>
                 </Viewport2DVisual3D>-->
         </helix:HelixViewport3D>
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="2">
             <ToolBar Background="Gray">
                 <TextBlock Text="X:"/>
                 <TextBlock Text="{Binding ElementName=canves ,Path=CursorPosition.X, StringFormat={}{0:f3}, FallbackValue=0.000 }"/>

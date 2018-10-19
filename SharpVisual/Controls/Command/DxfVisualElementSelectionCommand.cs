@@ -51,9 +51,9 @@ namespace SharpDxf.Visual.Controls
 
 
         /// <summary>
-        /// Keeps track of the old cursor.
+        /// 视图模型对像
         /// </summary>
-        private DxfVisualElement selectedElement;
+        private SharpDxfViewModel viewModel;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectionCommand"/> class.
@@ -61,10 +61,11 @@ namespace SharpDxf.Visual.Controls
         /// <param name="viewport">The viewport.</param>
         /// <param name="eventHandlerModels">The selection event handler for models.</param>
         /// <param name="eventHandlerVisuals">The selection event handler for visuals.</param>
-        public DxfViusalElementSelectionCommand(HelixViewport3D viewport, EventHandler<VisualSelectedEventArgs> eventHandlerVisuals)
+        public DxfViusalElementSelectionCommand(SharpDxfViewModel model)
         {
-            this.Viewport = viewport;
-            this.VisualsSelected = eventHandlerVisuals;
+            this.viewModel = model;
+            this.Viewport = model.ViewPort;
+            //this.VisualsSelected = eventHandlerVisuals;
         }
 
         /// <summary>
@@ -72,10 +73,10 @@ namespace SharpDxf.Visual.Controls
         /// </summary>
         public event EventHandler CanExecuteChanged;
 
-        /// <summary>
-        /// Occurs when visuals are selected.
-        /// </summary>
-        private event EventHandler<VisualSelectedEventArgs> VisualsSelected;
+        ///// <summary>
+        ///// Occurs when visuals are selected.
+        ///// </summary>
+        //private event EventHandler<VisualSelectedEventArgs> VisualsSelected;
 
         /// <summary>
         /// Gets the mouse down point (2D screen coordinates).
@@ -116,20 +117,20 @@ namespace SharpDxf.Visual.Controls
         protected void Started(Manipulation3DEventArgs e)
         {
             this.MouseDownPoint = e.CurrentPosition;
-            if (selectedElement != null)
+            if (viewModel.Subject.SelectedObject != null)
             {
-                selectedElement.IsSelected = false;
+                viewModel.Subject.SelectedObject.IsSelected = false;
             }
             var selectionHits = this.Viewport.Viewport.FindHits(Mouse.GetPosition(this.Viewport));
             if (selectionHits != null)
             {
                 var visuals = selectionHits.Where(x => x.Visual is DxfVisualElement).Select(x => x.Visual);
-                selectedElement = visuals.FirstOrDefault() as DxfVisualElement;
-                this.OnVisualsSelected(new VisualSelectedEventArgs(selectedElement));
-                if (selectedElement != null)
+                viewModel.Subject.SelectedObject = visuals.FirstOrDefault() as DxfVisualElement;
+                //this.OnVisualsSelected(new VisualSelectedEventArgs(viewModel.Subject.SelectedObject));
+                if (viewModel.Subject.SelectedObject != null)
                 {
-                    selectedElement.IsSelected = true;
-                    selectedElement.UpdateActiveHandle(e.CurrentPosition);
+                    viewModel.Subject.SelectedObject.IsSelected = true;
+                    viewModel.Subject.SelectedObject.UpdateActiveHandle(e.CurrentPosition);
                 }
             }
         }
@@ -144,7 +145,7 @@ namespace SharpDxf.Visual.Controls
         {
             var offset = e.CurrentPosition - this.MouseDownPoint;
             this.MouseDownPoint = e.CurrentPosition;
-            selectedElement?.moveByHandle(offset.ToPoint3D());
+            viewModel.Subject.SelectedObject?.moveByHandle(offset.ToPoint3D());
         }
 
         /// <summary>
@@ -158,18 +159,18 @@ namespace SharpDxf.Visual.Controls
 
         }
 
-        /// <summary>
-        /// Raises the <see cref="E:VisualsSelected" /> event.
-        /// </summary>
-        /// <param name="e">The <see cref="VisualSelectedEventArgs"/> instance containing the event data.</param>
-        protected void OnVisualsSelected(VisualSelectedEventArgs e)
-        {
-            var handler = this.VisualsSelected;
-            if (handler != null)
-            {
-                handler(this.Viewport, e);
-            }
-        }
+        ///// <summary>
+        ///// Raises the <see cref="E:VisualsSelected" /> event.
+        ///// </summary>
+        ///// <param name="e">The <see cref="VisualSelectedEventArgs"/> instance containing the event data.</param>
+        //protected void OnVisualsSelected(VisualSelectedEventArgs e)
+        //{
+        //    var handler = this.VisualsSelected;
+        //    if (handler != null)
+        //    {
+        //        handler(this.Viewport, e);
+        //    }
+        //}
 
         /// <summary>
         /// Gets the cursor for the gesture.
@@ -194,7 +195,7 @@ namespace SharpDxf.Visual.Controls
             this.Viewport.CaptureMouse();
 
             this.Started(new Manipulation3DEventArgs(this.Viewport.CursorPosition.Value));
-            if (selectedElement == null)
+            if (viewModel.Subject.SelectedObject == null)
             {
                 this.Viewport.ReleaseMouseCapture();
                 return;

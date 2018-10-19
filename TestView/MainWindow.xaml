@@ -23,7 +23,7 @@
             <visual:SharpDxfView  x:Name="view"/>
         </DockPanel>
         <DockPanel Grid.Column="1" Grid.Row="0">
-            <pro:PropertyGrid SelectedObject="{Binding ElementName=view ,Path=DataContext.SelectedObject}" CategoryControlType="Expander" TabVisibility="Collapsed" RequiredAttribute="{x:Type pg:BrowsableAttribute}"/>
+            <pro:PropertyGrid SelectedObject="{Binding ElementName=view ,Path=ViewModel.Subject.SelectedObject}" CategoryControlType="Expander" TabVisibility="Collapsed" RequiredAttribute="{x:Type pg:BrowsableAttribute}"/>
         </DockPanel>
         <DockPanel Grid.Column="0" Grid.Row="1">
             <Button x:Name="Load" Content="LoadDxf" Click="Load_Click"/>

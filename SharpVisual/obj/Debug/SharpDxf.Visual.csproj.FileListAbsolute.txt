@@ -27,3 +27,4 @@ C:\Users\SHZBG\Source\Repos\JustForTest\SharpVisual\obj\Debug\SharpDxf.Visual.Pr
 C:\Users\SHZBG\Source\Repos\JustForTest\SharpVisual\obj\Debug\SharpDxf.Visual.csproj.GenerateResource.Cache
 C:\Users\SHZBG\Source\Repos\JustForTest\SharpVisual\obj\Debug\SharpDxf.Visual.dll
 C:\Users\SHZBG\Source\Repos\JustForTest\SharpVisual\obj\Debug\SharpDxf.Visual.pdb
+C:\Users\SHZBG\Source\Repos\JustForTest\SharpVisual\obj\Debug\GeneratedInternalTypeHelper.g.cs
