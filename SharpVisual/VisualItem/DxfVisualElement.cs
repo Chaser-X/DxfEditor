@@ -2,8 +2,13 @@
 using PropertyTools.DataAnnotations;
 using SharpDxf.Entities;
 using System;
+using sysComponent = System.ComponentModel;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,18 +21,25 @@ namespace SharpDxf.Visual
     {
         bool IsSelected { get; }
         Color Color { get; set; }
+        Color SelectedColor { get; set; }
         IEntityObject ToDxfEntity();
     }
 
-    public abstract class DxfVisualElement : ModelVisual3D, IDxfVisualElement
+    [Serializable]
+    public abstract class DxfVisualElement : ModelVisual3D, IDxfVisualElement, ICloneable
     {
         // Using a DependencyProperty as the backing store for ColorProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ColorProperty =
-            DependencyProperty.Register("Color", typeof(Color), typeof(DxfVisualElement), new UIPropertyMetadata(Colors.Red, (s, e) =>
+            DependencyProperty.Register("Color", typeof(Color), typeof(DxfVisualElement), new UIPropertyMetadata(Colors.Transparent, (s, e) =>
             {
-                var model = ((DxfVisualElement)s).Content as GeometryModel3D;
-                model.BackMaterial = new DiffuseMaterial(new SolidColorBrush((Color)e.NewValue));
-                model.Material = new DiffuseMaterial(new SolidColorBrush((Color)e.NewValue));
+                ((DxfVisualElement)s).colorChanged(e);
+            }));
+
+        // Using a DependencyProperty as the backing store for ColorProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedColorProperty =
+            DependencyProperty.Register("SelectedColor", typeof(Color), typeof(DxfVisualElement), new UIPropertyMetadata(Colors.Yellow, (s, e) =>
+            {
+                ((DxfVisualElement)s).colorChanged(e);
             }));
 
         // Using a DependencyProperty as the backing store for IsSelected.  This enables animation, styling, binding, etc...
@@ -35,24 +47,42 @@ namespace SharpDxf.Visual
             DependencyProperty.Register("IsSelected", typeof(bool), typeof(DxfVisualElement), new UIPropertyMetadata(false, (s, e) =>
             {
                 var self = (DxfVisualElement)s;
-                self.Color = (bool)e.NewValue == true ? Colors.DarkBlue : Colors.Black;
                 if ((bool)e.NewValue)
+                {
+                    var c = new DependencyPropertyChangedEventArgs(IsSelectedProperty, self.Color, self.SelectedColor);
+                    self.colorChanged(c);
                     self.drawActiveHandle();
+                }
                 else
+                {
+                    var c = new DependencyPropertyChangedEventArgs(IsSelectedProperty, self.SelectedColor, self.Color);
+                    self.colorChanged(c);
                     self.clearActiveHandle();
+                }
             }));
-
 
         /// <summary>
         /// 获取或设置当前对象呈现的颜色
         /// </summary>
         [Category("Common")]
-        [Browsable(false)]
+        [Browsable(true)]
         public Color Color
         {
             get { return (Color)GetValue(ColorProperty); }
             set { SetValue(ColorProperty, value); }
         }
+
+        /// <summary>
+        /// 获取或设置选中对象呈现的颜色
+        /// </summary>
+        [Category("Common")]
+        [Browsable(true)]
+        public Color SelectedColor
+        {
+            get { return (Color)GetValue(SelectedColorProperty); }
+            set { SetValue(SelectedColorProperty, value); }
+        }
+
         /// <summary>
         /// 获取当前对象是否被选中
         /// </summary>
@@ -109,9 +139,21 @@ namespace SharpDxf.Visual
         /// 返回Dxf对象
         /// </summary>
         /// <returns>Dxf对象</returns>
-        public virtual IEntityObject ToDxfEntity()
+        public abstract IEntityObject ToDxfEntity();
+        /// <summary>
+        /// 深拷贝对象
+        /// </summary>
+        /// <returns></returns>
+        public abstract object Clone();
+        /// <summary>
+        /// 颜色发生变化时触发更新
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void colorChanged(DependencyPropertyChangedEventArgs e)
         {
-            return null;
+            var model = this.Content as GeometryModel3D;
+            model.BackMaterial = new DiffuseMaterial(new SolidColorBrush((Color)e.NewValue));
+            model.Material = new DiffuseMaterial(new SolidColorBrush((Color)e.NewValue));
         }
     }
 }

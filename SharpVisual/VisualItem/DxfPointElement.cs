@@ -1,0 +1,114 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SharpDxf.Entities;
+using System.Windows;
+using PropertyTools.DataAnnotations;
+using System.Windows.Media.Media3D;
+using HelixToolkit.Wpf;
+using System.Windows.Media;
+
+namespace SharpDxf.Visual
+{
+    [Serializable]
+    public class DxfPointElement : DxfVisualElement
+    {
+        // Using a DependencyProperty as the backing store for StartPoint.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PointProperty =
+            DependencyProperty.Register("Point", typeof(Point3D), typeof(DxfPointElement), new UIPropertyMetadata(new Point3D(0, 0, 0), (s, e) => ((DxfPointElement)s).updateElement()));
+
+        [Category("Special")]
+        [Browsable(true)]
+        [FormatString("0.000")]
+        public Point3D Point
+        {
+            get { return (Point3D)GetValue(PointProperty); }
+            set { SetValue(PointProperty, value); }
+        }
+       
+        private PointsVisual3D pointVisual = new PointsVisual3D();
+        private Entities.Point dxfpoint = new Entities.Point();
+
+        public DxfPointElement()
+        {
+            //active handle number
+            numberofHandle = 1;
+            activeHandle = -1;
+
+            pointVisual.Points.Clear();
+            pointVisual.Points.Add(Point);
+            this.Content = pointVisual.Content;
+            Color = Colors.Black;
+        }
+        public DxfPointElement(SharpDxf.Entities.Point point)
+        {
+            numberofHandle = 1;
+            activeHandle = -1;
+            dxfpoint = point;
+
+            Point = new Point3D(dxfpoint.Location.X, dxfpoint.Location.Y, dxfpoint.Location.Z);
+
+            pointVisual.Points.Clear();
+            pointVisual.Points.Add(Point);
+            this.Content = pointVisual.Content;
+
+            this.Color = dxfpoint.Color.ToMediaColor();
+        }
+
+        protected override void updateElement()
+        {
+            pointVisual.Points.Clear();
+            pointVisual.Points.Add(Point);
+
+            base.updateElement();
+        }
+        protected override void drawActiveHandle()
+        {
+            //this.Children.Clear();
+            //this.Children.Add(new PointsVisual3D() { Points = lineVisual.Points, Size = lineVisual.Thickness * 20, Color = Colors.Red });
+        }
+        protected override void clearActiveHandle()
+        {
+            this.activeHandle = -2;
+            //this.Children.Clear();
+        }
+        public override void UpdateActiveHandle(Point3D currentPos)
+        {
+            var distance = new double[numberofHandle];
+            distance[0] = currentPos.DistanceTo(Point);
+            if (distance[0] < 3)
+                activeHandle = -1;
+        }
+        public override void moveByHandle(Point3D offset)
+        {
+            switch (activeHandle)
+            {
+                case -1:
+                    {
+                        Point = (Point.ToVector3D() + offset.ToVector3D()).ToPoint3D();
+                        break;
+                    }
+                default: break;
+            }
+        }
+        public override IEntityObject ToDxfEntity()
+        {
+            dxfpoint.Location = new Vector3f((float)Point.X, (float)Point.Y, (float)Point.Z);
+            dxfpoint.Color = new AciColor(Color);
+            return dxfpoint;
+        }
+        public override object Clone()
+        {
+            return new DxfPointElement()
+            {
+                Point = this.Point,
+                IsSelected = this.IsSelected,
+                Color = this.Color,
+                SelectedColor = this.SelectedColor
+
+            };
+        }
+    }
+}

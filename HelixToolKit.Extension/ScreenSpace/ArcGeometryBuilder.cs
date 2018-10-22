@@ -35,12 +35,25 @@ namespace HelixToolKit.Extension
             indices.Freeze();
             return indices;
         }
-
+        /// <summary>
+        /// 生成圆弧点位
+        /// </summary>
+        /// <param name="center"></param>
+        /// <param name="radius"></param>
+        /// <param name="startAngle"></param>
+        /// <param name="endAngle"></param>
+        /// <param name="direct">为TRUE时CW，为false时CCW</param>
+        /// <param name="thetadiv"></param>
+        /// <param name="thickness"></param>
+        /// <param name="depthOffset"></param>
+        /// <param name="clipping"></param>
+        /// <returns></returns>
         public Point3DCollection CreatePositions(
             Point3D center,
             double radius,
             double startAngle,
             double endAngle,
+            bool direct,
             double thetadiv = 32,
             double thickness = 1.0,
             double depthOffset = 0.0,
@@ -49,6 +62,13 @@ namespace HelixToolKit.Extension
         {
             var halfThickness = thickness * 0.5;
             var spoints = new Point3DCollection();
+
+            if (!direct)//逆时针时
+            {
+                var temp = endAngle;
+                endAngle = startAngle;
+                startAngle = temp;
+            }
 
             if (Math.Abs(endAngle - startAngle) > 2 * Math.PI)
             {

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Media3D;
 
@@ -45,7 +47,7 @@ namespace SharpDxf.Visual.Controls
         private Cursor oldCursor;
 
         /// <summary>
-        /// Gets the mouse down point (2D screen coordinates).
+        /// Gets the mouse down point (3D screen coordinates).
         /// </summary>
         protected Point3D MouseDownPoint { get; private set; }
 
@@ -57,6 +59,7 @@ namespace SharpDxf.Visual.Controls
         /// </param>
         public void Execute(object parameter)
         {
+            if (!(parameter is RadioButton)) return;
             if (!(parameter is DxfVisualType)) throw new NotSupportedException();
 
             addType = (DxfVisualType)parameter ;

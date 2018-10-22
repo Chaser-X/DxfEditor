@@ -10,8 +10,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <local:ObjectToBoolConvert x:Key="ObjtoBool"/>
         <controls:FitViewCommand x:Key="FitCommand"/>
+        <local:AddDxfVisualConvert x:Key="addConvert"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -22,10 +22,11 @@
         <ToolBarTray>
             <ToolBar>
                 <TextBlock Text="Element:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/201.png}" Height="30"/>
-                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/217.png}" Height="30"/>
-                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/218.png}" Height="30"/>
-                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/219.png}" Height="30"/>
+                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/201.png}" IsChecked="{Binding AddObject, Converter={StaticResource addConvert}, ConverterParameter=Point}" Height="30"/>
+                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/217.png}" IsChecked="{Binding AddObject, Converter={StaticResource addConvert}, ConverterParameter=Line}" Height="30"/>
+                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/218.png}" IsChecked="{Binding AddObject, Converter={StaticResource addConvert}, ConverterParameter=Circle}" Height="30"/>
+                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/219.png}" IsChecked="{Binding AddObject, Converter={StaticResource addConvert}, ConverterParameter=Arc}" Height="30"/>
+                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/228.png}" IsChecked="{Binding AddObject, Converter={StaticResource addConvert}, ConverterParameter=Text}" Height="30"/>
                 <Separator/>
                 <TextBlock Text="Layer:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <ComboBox SelectedIndex="0">
@@ -35,7 +36,7 @@
                 <Separator/>
                 <TextBlock Text="Operater:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <Button Content="{local:Image /SharpDxf.Visual;component/Icons/114.png}" Height="30" Command="{StaticResource FitCommand}" CommandParameter="{Binding ElementName=canves}"/>
-                <Button Content="{local:Image /SharpDxf.Visual;component/Icons/106.png}" Height="30" Command="{Binding DeletCommand}"/><!--IsEnabled="{Binding Subject.SelectedObject, Converter ={StaticResource ObjtoBool}}"-->
+                <Button Content="{local:Image /SharpDxf.Visual;component/Icons/106.png}" Height="30" Command="{Binding DeletCommand}"/>
             </ToolBar>
         </ToolBarTray>
 
@@ -44,7 +45,8 @@
                 <MouseBinding Command="{Binding SelectionCommand}" Gesture="LeftClick" MouseAction="LeftClick"/>
             </helix:HelixViewport3D.InputBindings>
             <helix:HelixViewport3D.DefaultCamera>
-                <PerspectiveCamera  Position="0,0,1" />
+                <OrthographicCamera Position="0,0,80.22" LookDirection="0,0,-80.22" UpDirection="0,1,0" Width="56"/>
+
             </helix:HelixViewport3D.DefaultCamera>
             <helix:SunLight/>
             <helix:CoordinateSystemVisual3D ArrowLengths="5"/>
@@ -74,6 +76,9 @@
                         <Ellipse  Stroke="Green" StrokeThickness="0.1" Width="13" Height="13" IsHitTestVisible="True"/>
                     </Canvas>
                 </Viewport2DVisual3D>-->
+            <!--<ModelVisual3D>
+                <helix:BillboardTextVisual3D Position="0,0,0" Text="test" FontSize="20"/>
+            </ModelVisual3D>-->
         </helix:HelixViewport3D>
         <StackPanel Grid.Row="2">
             <ToolBar Background="Gray">

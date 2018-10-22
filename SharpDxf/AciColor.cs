@@ -168,6 +168,15 @@ namespace SharpDxf
         /// <summary>
         /// Initializes a new instance of the <c>AciColor</c> class.
         /// </summary>
+        ///<param name="color">A <see cref="Color">color</see>.</param>
+        public AciColor(System.Windows.Media.Color color)
+        {
+            this.index = RGBtoACI(color.R, color.G, color.B);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <c>AciColor</c> class.
+        /// </summary>
         /// <param name="index">Color index.</param>
         /// <remarks>
         /// Accepted color index values range from 0 to 256.
@@ -238,6 +247,19 @@ namespace SharpDxf
 
             byte[] rgb = aciColors[(byte) this.index];
             return Color.FromArgb(rgb[0], rgb[1], rgb[2]);
+        }
+
+        /// <summary>
+        /// Converts the AciColor to a <see cref="System.Windows.Media.Color">color</see>.
+        /// </summary>
+        /// <returns>A default color white will be used for byblock and bylayer colors.</returns>
+        public System.Windows.Media.Color ToMediaColor()
+        {
+            if (this.index < 1 || this.index > 255) //default color definition for byblock and bylayer colors
+                return System.Windows.Media.Colors.White;
+
+            byte[] rgb = aciColors[(byte)this.index];
+            return System.Windows.Media.Color.FromRgb(rgb[0], rgb[1], rgb[2]);
         }
         #endregion
 

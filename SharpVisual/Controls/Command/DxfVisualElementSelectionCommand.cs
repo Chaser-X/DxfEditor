@@ -121,16 +121,31 @@ namespace SharpDxf.Visual.Controls
             {
                 viewModel.Subject.SelectedObject.IsSelected = false;
             }
-            var selectionHits = this.Viewport.Viewport.FindHits(Mouse.GetPosition(this.Viewport));
-            if (selectionHits != null)
+            //EditModel
+            if (viewModel.EditMode)
             {
-                var visuals = selectionHits.Where(x => x.Visual is DxfVisualElement).Select(x => x.Visual);
-                viewModel.Subject.SelectedObject = visuals.FirstOrDefault() as DxfVisualElement;
-                //this.OnVisualsSelected(new VisualSelectedEventArgs(viewModel.Subject.SelectedObject));
-                if (viewModel.Subject.SelectedObject != null)
+                var addTarget = viewModel.AddObject.Clone() as DxfVisualElement;
+                viewModel.AddObject = null;
+                viewModel.Subject.EntityObjects.Add(addTarget);
+                viewModel.Subject.SelectedObject = addTarget;
+                addTarget.IsSelected = true;
+                //移动到鼠标位置
+                addTarget.moveByHandle(e.CurrentPosition);
+                
+            }
+            else
+            {
+                var selectionHits = this.Viewport.Viewport.FindHits(Mouse.GetPosition(this.Viewport));
+                if (selectionHits != null)
                 {
-                    viewModel.Subject.SelectedObject.IsSelected = true;
-                    viewModel.Subject.SelectedObject.UpdateActiveHandle(e.CurrentPosition);
+                    var visuals = selectionHits.Where(x => x.Visual is DxfVisualElement).Select(x => x.Visual);
+                    viewModel.Subject.SelectedObject = visuals.FirstOrDefault() as DxfVisualElement;
+                    //this.OnVisualsSelected(new VisualSelectedEventArgs(viewModel.Subject.SelectedObject));
+                    if (viewModel.Subject.SelectedObject != null)
+                    {
+                        viewModel.Subject.SelectedObject.IsSelected = true;
+                        viewModel.Subject.SelectedObject.UpdateActiveHandle(e.CurrentPosition);
+                    }
                 }
             }
         }

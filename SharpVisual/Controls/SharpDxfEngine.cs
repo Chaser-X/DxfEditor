@@ -93,9 +93,18 @@ namespace SharpDxf.Visual.Controls
                     case EntityType.Line:
                         this.EntityObjects.Add(new DxfLineElement(item as Line));
                         break;
-                    case EntityType.Point: break;
-                    case EntityType.Arc: break;
-                    case EntityType.Circle: break;
+                    case EntityType.Point:
+                        this.EntityObjects.Add(new DxfPointElement(item as Entities.Point));
+                        break;
+                    case EntityType.Arc:
+                        this.EntityObjects.Add(new DxfArcElement(item as Entities.Arc));
+                        break;
+                    case EntityType.Circle:
+                        this.EntityObjects.Add(new DxfCircleElement(item as Entities.Circle));
+                        break;
+                    case EntityType.Text:
+                        this.EntityObjects.Add(new DxfTextElement(item as Entities.Text));
+                        break;
                     default: break;
                 }
             }
@@ -143,6 +152,6 @@ namespace SharpDxf.Visual.Controls
             ShowModel.Children.Clear();
             EntityObjects?.ToList().ForEach(x => ShowModel.Children.Add(x));
         }
-     
+
     }
 }

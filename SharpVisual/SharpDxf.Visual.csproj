@@ -46,6 +46,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -71,7 +72,7 @@
     </Compile>
     <Compile Include="ImageExtension.cs" />
     <Compile Include="NotifyPropertyChangeBase.cs" />
-    <Compile Include="ObjectToBoolConvert.cs" />
+    <Compile Include="Convert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -86,7 +87,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="VisualItem\DxfArcElement.cs" />
+    <Compile Include="VisualItem\DxfCircleElement.cs" />
     <Compile Include="VisualItem\DxfLineElement.cs" />
+    <Compile Include="VisualItem\DxfPointElement.cs" />
+    <Compile Include="VisualItem\DxfTextElement.cs" />
     <Compile Include="VisualItem\DxfVisualElement.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

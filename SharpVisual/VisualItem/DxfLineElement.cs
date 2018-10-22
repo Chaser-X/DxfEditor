@@ -17,7 +17,6 @@ namespace SharpDxf.Visual
 {
     public class DxfLineElement : DxfVisualElement
     {
-
         // Using a DependencyProperty as the backing store for StartPoint.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StartPointProperty =
             DependencyProperty.Register("StartPoint", typeof(Point3D), typeof(DxfLineElement), new UIPropertyMetadata(new Point3D(0, 0, 0), (s, e) => ((DxfLineElement)s).updateElement()));
@@ -26,7 +25,7 @@ namespace SharpDxf.Visual
         public static readonly DependencyProperty EndPointProperty =
             DependencyProperty.Register("EndPoint", typeof(Point3D), typeof(DxfLineElement), new UIPropertyMetadata(new Point3D(10, 10, 0), (s, e) => ((DxfLineElement)s).updateElement()));
 
-        [Category("Line")]
+        [Category("Special")]
         [Browsable(true)]
         [FormatString("0.000")]
         public Point3D StartPoint
@@ -34,7 +33,6 @@ namespace SharpDxf.Visual
             get { return (Point3D)GetValue(StartPointProperty); }
             set { SetValue(StartPointProperty, value); }
         }
-        [Category("Line")]
         [Browsable(true)]
         [FormatString("0.000")]
         public Point3D EndPoint
@@ -50,18 +48,20 @@ namespace SharpDxf.Visual
         {
             //active handle number
             numberofHandle = 2;
+            activeHandle = -1;
 
             var ps = new Point3DCollection();
             ps.Add(StartPoint);
             ps.Add(EndPoint);
             lineVisual.Points = ps;
-            lineVisual.Thickness = 0.5;
+            lineVisual.Thickness = 0.2;
             this.Content = lineVisual.Content;
-            Color = Colors.Black;
+            this.Color = Colors.Black;
         }
         public DxfLineElement(SharpDxf.Entities.Line line)
         {
             numberofHandle = 2;
+            activeHandle = -1;
             dxfline = line;
 
             StartPoint = new Point3D(dxfline.StartPoint.X, dxfline.StartPoint.Y, dxfline.StartPoint.Z);
@@ -72,7 +72,7 @@ namespace SharpDxf.Visual
             lineVisual.Thickness = 0.2;
 
             this.Content = lineVisual.Content;
-            Color = Colors.Black;
+            this.Color = dxfline.Color.ToMediaColor();
         }
 
         protected override void updateElement()
@@ -131,7 +131,20 @@ namespace SharpDxf.Visual
         {
             dxfline.StartPoint = new Vector3f((float)StartPoint.X, (float)StartPoint.Y, (float)StartPoint.Z);
             dxfline.EndPoint = new Vector3f((float)EndPoint.X, (float)EndPoint.Y, (float)EndPoint.Z);
+            dxfline.Color = new AciColor(Color);
             return dxfline;
+        }
+        public override object Clone()
+        {
+            return new DxfLineElement()
+            {
+                StartPoint = this.StartPoint,
+                EndPoint = this.EndPoint,
+                IsSelected = this.IsSelected,
+                Color = this.Color,
+                SelectedColor = this.SelectedColor
+
+            };
         }
     }
 }

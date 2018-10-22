@@ -20,6 +20,8 @@ namespace HelixToolKit.Extension
         public static readonly DependencyProperty RadiusProperty =
             DependencyProperty.Register("Radius", typeof(double), typeof(ArcVisual3D), new UIPropertyMetadata(1.0, GeometryChanged));
 
+        public static readonly DependencyProperty DirectProperty =
+            DependencyProperty.Register("Direct", typeof(bool), typeof(ArcVisual3D), new UIPropertyMetadata(true, GeometryChanged));
 
         public static readonly DependencyProperty StartAngleProperty =
              DependencyProperty.Register("StartAngle", typeof(double), typeof(ArcVisual3D), new UIPropertyMetadata(0.0, GeometryChanged));
@@ -61,6 +63,11 @@ namespace HelixToolKit.Extension
             get { return (double)GetValue(EndAngleProperty); }
             set { SetValue(EndAngleProperty, value); }
         }
+        public bool Direct
+        {
+            get { return (bool)GetValue(DirectProperty); }
+            set { SetValue(DirectProperty, value); }
+        }
 
         public int ThetaDiv
         {
@@ -74,15 +81,16 @@ namespace HelixToolKit.Extension
             builder = new ArcGeometryBuilder(this);
         }
 
-        public ArcVisual3D(Point3D center , double radius = 10, double startangle = 0, double endangle = Math.PI * 2, int thetadiv = 32,
+        public ArcVisual3D(Point3D center, double radius = 10, double startangle = 0, double endangle = Math.PI * 2,bool direct = true, int thetadiv = 32,
             double thickness = 1)
         {
             builder = new ArcGeometryBuilder(this);
-  
+
             Center = center;
             Radius = radius;
             StartAngle = startangle;
             EndAngle = endangle;
+            Direct = direct;
             ThetaDiv = thetadiv;
             Thickness = thickness;
         }
@@ -90,7 +98,7 @@ namespace HelixToolKit.Extension
         protected override void UpdateGeometry()
         {
             this.Mesh.Positions = this.builder.CreatePositions(this.Center, this.Radius, this.StartAngle,
-                this.EndAngle, this.ThetaDiv, this.Thickness);
+                this.EndAngle,this.Direct , this.ThetaDiv, this.Thickness);
             var nn = this.Mesh.Positions.Count;
             if (this.Mesh.TriangleIndices.Count != nn * 3)
             {

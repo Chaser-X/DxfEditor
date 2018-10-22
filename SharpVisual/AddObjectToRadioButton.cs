@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace SharpDxf.Visual
 {
-    public class ObjectToBoolConvert : IValueConverter
+    public class AddObjectToRadioButton : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -33,4 +33,3 @@ C:\Users\SHZBG\Source\Repos\JustForTest\TestDX\obj\Debug\TestDX.Properties.Resou
 C:\Users\SHZBG\Source\Repos\JustForTest\TestDX\obj\Debug\TestDX.csproj.GenerateResource.Cache
 C:\Users\SHZBG\Source\Repos\JustForTest\TestDX\obj\Debug\TestDX.exe
 C:\Users\SHZBG\Source\Repos\JustForTest\TestDX\obj\Debug\TestDX.pdb
-C:\Users\SHZBG\Source\Repos\JustForTest\TestDX\obj\Debug\TestDX.csprojResolveAssemblyReference.cache

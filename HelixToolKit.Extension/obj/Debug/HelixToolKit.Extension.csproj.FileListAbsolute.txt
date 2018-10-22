@@ -20,4 +20,3 @@ C:\Users\SHZBG\Source\Repos\JustForTest\HelixToolKit.Extension\bin\Debug\HelixTo
 C:\Users\SHZBG\Source\Repos\JustForTest\HelixToolKit.Extension\bin\Debug\HelixToolkit.Wpf.xml
 C:\Users\SHZBG\Source\Repos\JustForTest\HelixToolKit.Extension\obj\Debug\HelixToolKit.Extension.dll
 C:\Users\SHZBG\Source\Repos\JustForTest\HelixToolKit.Extension\obj\Debug\HelixToolKit.Extension.pdb
-C:\Users\SHZBG\Source\Repos\JustForTest\HelixToolKit.Extension\obj\Debug\HelixToolKit.Extension.csprojResolveAssemblyReference.cache

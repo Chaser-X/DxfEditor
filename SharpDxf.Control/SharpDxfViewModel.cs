@@ -59,14 +59,14 @@ namespace SharpDxf.Control
 
             foreach (var a in doc.Circles)
             {
-                var arc = new ArcVisual3D(new Point3D(a.Center.X, a.Center.Y, a.Center.Z), a.Radius, 0, 2 * Math.PI, 64, 0.1);
+                var arc = new ArcVisual3D(new Point3D(a.Center.X, a.Center.Y, a.Center.Z), a.Radius, 0, 2 * Math.PI, true,64, 0.1);
                 arc.Color = Colors.Red;
                 Model3D.Children.Add(arc.Content);
             }
 
             foreach (var a in doc.Arcs)
             {
-                var arc = new ArcVisual3D(new Point3D(a.Center.X, a.Center.Y, a.Center.Z), a.Radius, a.StartAngle * Math.PI / 180, a.EndAngle * Math.PI / 180, 64, 0.1);
+                var arc = new ArcVisual3D(new Point3D(a.Center.X, a.Center.Y, a.Center.Z), a.Radius, a.StartAngle * Math.PI / 180, a.EndAngle * Math.PI / 180,true, 64, 0.1);
                 arc.Color = Colors.Red;
 
                 Model3D.Children.Add(arc.Content);
