@@ -19,6 +19,11 @@ namespace SharpDxf.Visual
         public static readonly DependencyProperty PointProperty =
             DependencyProperty.Register("Point", typeof(Point3D), typeof(DxfPointElement), new UIPropertyMetadata(new Point3D(0, 0, 0), (s, e) => ((DxfPointElement)s).updateElement()));
 
+        // Using a DependencyProperty as the backing store for EndAngle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SizeProperty =
+            DependencyProperty.Register("Size", typeof(double), typeof(DxfPointElement), new UIPropertyMetadata(5.0, (s, e) => ((DxfPointElement)s).updateElement()));
+
+
         [Category("Special")]
         [Browsable(true)]
         [FormatString("0.000")]
@@ -27,7 +32,15 @@ namespace SharpDxf.Visual
             get { return (Point3D)GetValue(PointProperty); }
             set { SetValue(PointProperty, value); }
         }
-       
+
+        [Browsable(true)]
+        [FormatString("0.000")]
+        public double Size
+        {
+            get { return (double)GetValue(SizeProperty); }
+            set { SetValue(SizeProperty, value); }
+        }
+
         private PointsVisual3D pointVisual = new PointsVisual3D();
         private Entities.Point dxfpoint = new Entities.Point();
 
@@ -39,6 +52,8 @@ namespace SharpDxf.Visual
 
             pointVisual.Points.Clear();
             pointVisual.Points.Add(Point);
+            pointVisual.Size = Size;
+
             this.Content = pointVisual.Content;
             Color = Colors.Black;
         }
@@ -49,9 +64,11 @@ namespace SharpDxf.Visual
             dxfpoint = point;
 
             Point = new Point3D(dxfpoint.Location.X, dxfpoint.Location.Y, dxfpoint.Location.Z);
+            this.Size = dxfpoint.Thickness;
 
             pointVisual.Points.Clear();
             pointVisual.Points.Add(Point);
+            pointVisual.Size = dxfpoint.Thickness;
             this.Content = pointVisual.Content;
 
             this.Color = dxfpoint.Color.ToMediaColor();
@@ -61,6 +78,7 @@ namespace SharpDxf.Visual
         {
             pointVisual.Points.Clear();
             pointVisual.Points.Add(Point);
+            pointVisual.Size = Size;
 
             base.updateElement();
         }
@@ -96,6 +114,7 @@ namespace SharpDxf.Visual
         public override IEntityObject ToDxfEntity()
         {
             dxfpoint.Location = new Vector3f((float)Point.X, (float)Point.Y, (float)Point.Z);
+            dxfpoint.Thickness = (float)this.Size;
             dxfpoint.Color = new AciColor(Color);
             return dxfpoint;
         }
@@ -104,6 +123,7 @@ namespace SharpDxf.Visual
             return new DxfPointElement()
             {
                 Point = this.Point,
+                Size = this.Size,
                 IsSelected = this.IsSelected,
                 Color = this.Color,
                 SelectedColor = this.SelectedColor

@@ -26,9 +26,7 @@ namespace TestView
         public MainWindow()
         {
             InitializeComponent();
-            //var model = view.DataContext as SharpDxfViewModel;
-            //model.Load(@"C:\Users\SHZBG\Desktop\3DVisual\ducky.obj");
-        //    this.view.ViewModel.LoadDxf(@"C: \Users\SHZBG\Desktop\3DVisual\metal-part-01.dxf");
+      
             
         }
 

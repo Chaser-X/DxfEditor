@@ -66,7 +66,7 @@ namespace SharpDxf.Visual
         }
 
         [Browsable(true)]
-        [Description("获取或设置圆弧方向，为True时\"CW\"，为发False时\"CCW\"")]
+        [Description("获取或设置圆弧方向，为True时\"CW\"，为False时\"CCW\"")]
         public bool Direct
         {
             get { return (bool)GetValue(DirectProperty); }

@@ -35,18 +35,20 @@
                 </ComboBox>
                 <Separator/>
                 <TextBlock Text="Operater:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Button Content="{local:Image /SharpDxf.Visual;component/Icons/114.png}" Height="30" Command="{StaticResource FitCommand}" CommandParameter="{Binding ElementName=canves}"/>
+                <Button Content="{local:Image /SharpDxf.Visual;component/Icons/114.png}" Height="30" Command="{StaticResource FitCommand}" CommandParameter="{Binding ElementName=canves}" IsEnabled="{Binding Is3DVisualize, Mode=OneWay}"/>
                 <Button Content="{local:Image /SharpDxf.Visual;component/Icons/106.png}" Height="30" Command="{Binding DeletCommand}"/>
+                <!--<Separator/>
+                <TextBlock Text="Misc:" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+                <ToggleButton Content="{local:Image /SharpDxf.Visual;component/Icons/111.png}" IsChecked="{Binding Is3DVisualize}" Height="30"/>
             </ToolBar>
         </ToolBarTray>
 
-        <helix:HelixViewport3D  Grid.Row="1" x:Name="canves" Background="LightGray" ModelUpDirection="0,1,0" ZoomExtentsWhenLoaded="True" ShowCoordinateSystem="True" IsHeadLightEnabled="True" IsRotationEnabled="True" RotateAroundMouseDownPoint="True" CameraRotationMode="Trackball" CalculateCursorPosition="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" ViewCubeHeight="78" >
+        <helix:HelixViewport3D  Grid.Row="1" x:Name="canves" Background="LightGray" ModelUpDirection="0,1,0" ZoomExtentsWhenLoaded="False" ShowCoordinateSystem="True" IsHeadLightEnabled="True" IsRotationEnabled="True" RotateAroundMouseDownPoint="True" CameraRotationMode="Trackball" CalculateCursorPosition="True" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" ViewCubeHeight="78" >
             <helix:HelixViewport3D.InputBindings>
                 <MouseBinding Command="{Binding SelectionCommand}" Gesture="LeftClick" MouseAction="LeftClick"/>
             </helix:HelixViewport3D.InputBindings>
             <helix:HelixViewport3D.DefaultCamera>
-                <OrthographicCamera Position="0,0,80.22" LookDirection="0,0,-80.22" UpDirection="0,1,0" Width="56"/>
-
+                <OrthographicCamera Position="0,0,80.22" LookDirection="0,0,-80.22" UpDirection="0,1,0" Width="200"/>
             </helix:HelixViewport3D.DefaultCamera>
             <helix:SunLight/>
             <helix:CoordinateSystemVisual3D ArrowLengths="5"/>
